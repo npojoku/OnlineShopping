@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Scythian</a>
+            <a class="navbar-brand" href="viewProducts.php">Scythian</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -20,8 +20,12 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">View Products</a></li>
-                    <li><a href="#">Manage Products</a></li>
+                    <li>
+                      <a href="viewProducts.php">
+                        View Products
+                      </a>
+                    </li>
+                    <li><a href="manageProducts.php">Manage Products</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -30,15 +34,26 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a href="php/newPage.php">View Orders</a></li>
-                    <li><a href="#">Manage Orders</a></li>
+                    <li>
+                      <a href="viewOrders.php">
+                        View Orders
+                      </li>
+                    <li>
+                      <a href="manageOrders.php">
+                        Manage Orders
+                      </a>
+                    </li>
                   </ul>
                 </li>
                 <li>
-                    <a href="#">Profile</a>
+                    <a href="profile.php">
+                      Profile
+                    </a>
                 </li>
                 <li>
-                    <a href="#">Sign Out</a>
+                    <a href="index.php">
+                      Sign Out
+                    </a>
                 </li>
             </ul>
         </div>

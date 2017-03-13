@@ -7,9 +7,11 @@
 <?php include('parts/head.php'); ?>
 
 <body>
+<!-- navigation bar -->
+<?php include('parts/nav.php'); ?>
 
 <!-- body -->
-<?php include('parts/login.php'); ?>
+<?php include('parts/profile.php'); ?>
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>
