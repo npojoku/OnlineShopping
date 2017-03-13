@@ -7,11 +7,9 @@
 <?php include('parts/head.php'); ?>
 
 <body>
-<!-- navigation bar -->
-<?php include('parts/nav.php'); ?>
 
 <!-- body -->
-<?php include('parts/viewProducts.php'); ?>
+<?php include('parts/register.php'); ?>
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>
