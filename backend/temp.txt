@@ -1,0 +1,48 @@
+<?php
+require '../core.inc.php';
+require '../session.php';
+/*
+Path: ---------------------------
+
+Description: -----------------------------------
+
+Input:
+	$----
+		'----'		(double) ----------	
+		'----'		(double) ----------
+		'----'		(double) ----------
+		'----'		(double) ---------
+		'----'		(double) ----------
+		'----'		(double) ----------
+		'----'		(double) ----------
+
+Output:
+	1						sucessful
+	Json array:
+		'-----'			(string) ----------
+		'-----'			(string) ----------
+		'-----'			(string) ----------
+		'-----'			(string) ----------
+		'-----'			(double) ----------
+		'-----'			(double) ----------
+		
+Error:
+	0						failed
+	-1						no session
+	-2						field must not be empty/null
+	--						----------
+	--						----------
+	--						----------
+	--						----------
+	-7						required field not set
+*/
+
+
+?>
+
+
+
+
+
+
+$user_id ='1';
