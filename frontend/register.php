@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Log In</title>
+    <title>Register</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,6 +23,26 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+        <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#ddl').on('change', function() {
+              if ( this.value == '1')
+              //.....................^.......
+              {
+                $("#retailer").show();
+              }
+              else
+              {
+                $("#retailer").hide();
+              }
+            });
+        });
+    </script>
 
 </head>
 
@@ -90,24 +110,58 @@
                             padding-right: 140px;
                             padding-top: 25px;
                             padding-bottom: 25px;">
-                        <h3>Log In
+                        <h3>Register
                         </h3>
                         <br>
-                       <form>
+                        <div class="dropdown">
+                            <label class="col-sm-2 control-label" style="width: 110px;">Register as</label>
+                              <button class="btn btn-default dropdown-toggle" type="button" id="ddl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                -- Select --
+                                <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Customer</a></li>
+                                <li><a href="#">Retailer</a></li>
+                              </ul>
+                            </div>
+                        <br>
+                       <form class="form-horizontal">
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <label class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                              <input type="Email" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
                           </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> Remember me
-                            </label>
+                        <div class="form-group">
+                            <label for="inputFirstName" class="col-sm-2 control-label" style=" padding-left: 0px; padding-right: 0px;">First Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                            </div>
                           </div>
-                          <button type="submit" class="btn btn-default">Submit</button>
+                        <div class="form-group">
+                            <label for="inputLastName" class="col-sm-2 control-label" style=" padding-left: 0px; padding-right: 0px;">Last Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                            </div>
+                          </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+                            </div>
+                          </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Address</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                            </div>
+                          </div>
                         </form>
                     </div>
                 </div>
@@ -133,12 +187,6 @@
 
     </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 
 </body>
 
