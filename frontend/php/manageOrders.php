@@ -11,16 +11,16 @@
 <?php include('parts/nav.php'); ?>
 
 <!-- body -->
-<?php include('parts/manageOrders.php'); ?>
+<?php include('parts/manageOrdersBody.php'); ?>
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>
 
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
+<script src="../js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 </body>
 </html>

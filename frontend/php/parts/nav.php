@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php">
+                    <a href="login.php">
                       Sign Out
                     </a>
                 </li>
