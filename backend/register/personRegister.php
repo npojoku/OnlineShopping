@@ -7,16 +7,16 @@ Description: register as a new user
 
 Input:
 	$_POST
-		'FirstName'		(string) 
-		'LastName'			(string) 
-		'Email'				(string) 
-		'Password'			(string) 
-		'Phone'		(string) 
+		'FirstName'		(string)
+		'LastName'			(string)
+		'Email'				(string)
+		'Password'			(string)
+		'Phone'		(string)
 		'Address'    	(string)
 
 Output
 	1						sucessful
-		
+
 Error:
 	0						failed
 	-1						field must not be empty/null
@@ -27,7 +27,7 @@ Error:
 	-311					only letter and space allowed in last name
 	-40						Password length must be 8 - 20
 	-41						Password contains symbols (No symbol allowed)
-	-42						Password must include at least one number! 
+	-42						Password must include at least one number!
 	-43						Password must include at least one lower-case letter!
 	-44						Password must include at least one Upper-case letter!
 	-60						Phone number length is not 10
@@ -50,7 +50,7 @@ if (isset($_POST['FirstName'])&&
 		if(strlen($FirstName) > 15){
   				echo '-300';
   				exit();
-  			} 
+  			}
 
 		$LastName = $_POST['LastName'];
 		if (!preg_match("/^[a-zA-Z ]*$/",$LastName)) {
@@ -93,12 +93,12 @@ if (isset($_POST['FirstName'])&&
 			echo '-61';
 			exit();
 		}
-		
+
 		if(!(strlen($Phone) == 10)){
 				echo '-60';
 				exit();
 			}
-		
+
 
 		if (
 	  	!empty($FirstName) &&
@@ -153,8 +153,12 @@ function checkDuplicatePhone($con, $value) {
 	}
 }
 
+if (isset($_POST['retailer'])) {
+	header("Location: ../../frontend/php/registerRetailer.php");
+	die();
+} else {
+	header("Location: ../../frontend/php/cardInfo.php");
+	die();
+}
 
 ?>
-
-
-
