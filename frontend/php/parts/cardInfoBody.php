@@ -11,7 +11,7 @@
                         padding-right: 140px;
                         padding-top: 25px;
                         padding-bottom: 25px;">
-                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Credit Card Info
+                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Credit Card Info&nbsp;&nbsp;
                     </h3>
                     <br>
                    <form class="form-horizontal">
