@@ -14,21 +14,21 @@
                     <h3>Log In
                     </h3>
                     <br>
-                   <form>
+                   <form action = "../../backend/login/logIn.php" method = "post">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        <input type="email" class="form-control" name = "Email" placeholder="Email">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control" name = "Password" placeholder="Password">
                       </div>
                       <div class="checkbox">
                         <label>
                           <input type="checkbox"> Remember me
                         </label>
                       </div>
-                      <button type="submit" class="btn btn-default">Submit</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
