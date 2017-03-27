@@ -30,10 +30,17 @@
                       </div>
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
-                </div>
+
+                    <!-- new user register -->
+                    <div>
+                      <h5><i>New user?</i></h5>
+                      <a href="register.php">
+                        <i>Create new account</i>
+                      </a>
+                    </div>
+              </div>
+
             </div>
         </div>
-
     </div>
-
 </div>
