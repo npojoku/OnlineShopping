@@ -1,5 +1,5 @@
 <?php
-require '../core.inc.php';
+//require '../core.inc.php';
 /*
 Path: /self/personRegister.php/
 
@@ -36,52 +36,80 @@ Error:
 */
 
 global $con;
-if (isset($_POST['FirstName'])&&
-	isset($_POST['LastName'])&&
-	isset($_POST['Email'])&&
-	isset($_POST['Password'])&&
-	isset($_POST['Phone'])&&
-	isset($_POST['Address']) ) {
+$errors = array();
+if (isset($_POST['register'])) {
+
+	$fields = array('FirstName', 'LastName', 'Email', 'Password', 'Phone', 'Address');
+	$emptyFields = false;
+	foreach($fields AS $fieldname) {
+	  if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Please fill in all the fields!</center></div>';
+	    $emptyFields = true;
+      break;
+	  }
+	}
+
+	if(!$emptyFields) {
+		$validateError = false;
 		$FirstName = $_POST['FirstName'];
 		if (!preg_match("/^[a-zA-Z ]*$/",$FirstName)) {
-  			echo '-301';
-  			exit();
+			  $errors[] = '<div class="alert alert-danger" role="alert"><center>Only letter and space allowed in first name!</center></div>';
+				$validateError = true;
+  			//echo '-301';
+  			//exit();
 		}
 		if(strlen($FirstName) > 15){
-  				echo '-300';
-  				exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>First name is too long!</center></div>';
+			$validateError = true;
+  				//echo '-300';
+  				//exit();
   			}
 
 		$LastName = $_POST['LastName'];
 		if (!preg_match("/^[a-zA-Z ]*$/",$LastName)) {
-  			echo '-311';
-  			exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Only letter and space allowed in last name!</center></div>';
+			$validateError = true;
+  			//echo '-311';
+  			//exit();
 		}
 		if(strlen($LastName) > 15){
-  				echo '-310';
-  				exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Last name is too long!</center></div>';
+			$validateError = true;
+  				//echo '-310';
+  				//exit();
   		}
 
 		$Password = $_POST['Password'];
 		if( strlen($Password) < 8 || strlen($Password) >20) {
-			echo '-40';
-			exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password length must be 8 - 20!</center></div>';
+			$validateError = true;
+			//echo '-40';
+			//exit();
 		}
 		if( preg_match("#\W+#", $Password) ) {
-			echo '-41';
-			exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password contains symbols (No symbol allowed)!</center></div>';
+			$validateError = true;
+			//echo '-41';
+			//exit();
 		}
+
 		if( !preg_match("#[0-9]+#", $Password) ) {
-			echo '-42';
-			exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password must include at least one number!</center></div>';
+			$validateError = true;
+			//echo '-42';
+			//exit();
 		}
 		if( !preg_match("#[a-z]+#", $Password) ) {
-			echo '-43';
-			exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password must include at least one lower-case letter!</center></div>';
+			$validateError = true;
+			//echo '-43';
+			//exit();
 		}
 		if( !preg_match("#[A-Z]+#", $Password) ) {
-			echo '-44';
-			exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password must include at least one Upper-case letter!</center></div>';
+			$validateError = true;
+			//echo '-44';
+			//exit();
 		}
 		$Password_hash = md5($Password); //hash the Password before saving
 
@@ -90,23 +118,21 @@ if (isset($_POST['FirstName'])&&
 
 		$Phone = $_POST['Phone'];
 		if(!ctype_digit($Phone)){
-			echo '-61';
-			exit();
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Phone number can only contain number!</center></div>';
+			$validateError = true;
+			//echo '-61';
+			//exit();
 		}
 
-		if(!(strlen($Phone) == 10)){
-				echo '-60';
-				exit();
+		if(strlen($Phone) != 10){
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Phone number length must be 10!</center></div>';
+			$validateError = true;
+				//echo '-60';
+				//exit();
 			}
 
 
-		if (
-	  	!empty($FirstName) &&
-	   	!empty($LastName) &&
-	   	!empty($Email) &&
-	   	!empty($Password_hash) &&
-	   	!empty($Address) &&
-	   	!empty($Phone)) {
+		if (!$validateError) {
 
 			if (checkDuplicateEmail($con, $Email) || checkDuplicatePhone($con, $Phone)) {
 				echo '-2';
@@ -116,17 +142,20 @@ if (isset($_POST['FirstName'])&&
 				$query->bind_param("ssssis", $FirstName, $LastName, $Email, $Password_hash, $Phone, $Address);
 
 				if ($query->execute()) {
-					echo '1';
+					if (isset($_POST['retailer'])) {
+					header("Location: http://localhost/cpsc304_project_30/frontend/php/registerRetailer.php");
+					exit();
+				} else {
+					header("Location: http://localhost/cpsc304_project_30/frontend/php/cardInfo.php");
+					exit();
+				}
+					//echo '1';
 				} else {
 					echo '0';
 				}
 			}
-		} else {
-			echo '-1';
 		}
-} else {
-	echo "-7";
-	exit();
+  }
 }
 
 function checkDuplicateEmail($con, $value) {
@@ -151,14 +180,6 @@ function checkDuplicatePhone($con, $value) {
 	} else {
 		return false;
 	}
-}
-
-if (isset($_POST['retailer'])) {
-	header("Location: ../../frontend/php/registerRetailer.php");
-	die();
-} else {
-	header("Location: ../../frontend/php/cardInfo.php");
-	die();
 }
 
 ?>

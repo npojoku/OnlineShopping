@@ -1,6 +1,8 @@
 <DOCTYPE html>
 
 <?php $title = 'Scythian'; ?>
+<?php require '../../backend/core.inc.php'; ?>
+<?php include('../../backend/register/personRegister.php'); ?>
 
 <html>
 <!-- header -->
