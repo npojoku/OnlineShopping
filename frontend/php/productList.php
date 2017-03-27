@@ -2,16 +2,17 @@
 
 <?php $title = 'Scythian'; ?>
 <?php require '../../backend/core.inc.php'; ?>
-<?php include('../../backend/register/personRegister.php'); ?>
 
 <html>
 <!-- header -->
 <?php include('parts/head.php'); ?>
 
 <body>
+  <!-- navigation bar -->
+  <?php include('parts/nav.php'); ?>
 
 <!-- body -->
-<?php include('parts/registerBody.php'); ?>
+<?php include('parts/productListBody.php'); ?>
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>
