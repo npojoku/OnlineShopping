@@ -1,8 +1,6 @@
 <DOCTYPE html>
 
 <?php $title = 'Scythian'; ?>
-<?php require '../../backend/core.inc.php'; ?>
-<?php include('../../backend/login/logIn.php'); ?>
 
 <html>
 <!-- header -->
@@ -11,7 +9,7 @@
 <body>
 
 <!-- body -->
-<?php include('parts/loginBody.php'); ?>
+<?php include('parts/errorBody.php'); ?>
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>

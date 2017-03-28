@@ -1,5 +1,4 @@
 <?php
-//require '../core.inc.php';
 /*
 Path: /self/personRegister.php/
 
@@ -7,11 +6,11 @@ Description: register as a new user
 
 Input:
 	$_POST
-		'FirstName'			(string) 
-		'LastName'			(string) 
-		'Email'				(string) 
-		'Password'			(string) 
-		'Phone'				(string) 
+		'FirstName'			(string)
+		'LastName'			(string)
+		'Email'				(string)
+		'Password'			(string)
+		'Phone'				(string)
 		'Address'    		(string)
 
 Output
