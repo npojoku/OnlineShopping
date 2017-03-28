@@ -8,11 +8,12 @@
 <?php include('parts/head.php'); ?>
 
 <body>
+
 <!-- navigation bar -->
 <?php include('parts/nav.php'); ?>
 
 <!-- body -->
-<?php include('parts/viewProductsBody.php'); ?>
+<?php include('parts/errorBody.php'); ?>
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>

@@ -22,6 +22,19 @@ function loggedin() {
 	}
 }
 
+function isRetailer(){
+	// verify that user type has been set
+	if (isset($_SESSION['UserType']) && !empty($_SESSION['UserType'])) {
+
+		// verify that user type is retailer
+		if($_SESSION['UserType'] === '1'){
+			return true;
+		}
+	}
+
+	return false;
+}
+
 function getPersonName($c, $i) {
 	$query = "SELECT FirstName FROM Person WHERE PersonId = '$i'";
 	$r = mysqli_fetch_array(mysqli_query($c, $query));
