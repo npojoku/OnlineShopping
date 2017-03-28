@@ -1,6 +1,7 @@
 <DOCTYPE html>
 
 <?php $title = 'Scythian'; ?>
+<?php require '../../backend/core.inc.php'; ?>
 
 <html>
 <!-- header -->
