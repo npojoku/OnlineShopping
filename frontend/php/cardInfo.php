@@ -8,6 +8,9 @@
 
 <body>
 
+<!-- navigation bar -->
+<?php include('parts/nav.php'); ?>
+
 <!-- body -->
 <?php include('parts/cardInfoBody.php'); ?>
 

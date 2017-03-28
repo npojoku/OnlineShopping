@@ -1,7 +1,8 @@
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
+
+        <!-- header title -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -9,55 +10,80 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="viewProducts.php">Scythian</a>
+
+            <div class="navbar-brand not-active">
+              Scythian
+            </div>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="dropdown">
+
+              <!-- Products toggle menu - don't display if not logged in-->
+              <li class="dropdown" id="products-menu" <?php if (! loggedin()){?>style="display:none"<?php } ?>>
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     Products
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
+
+                    <!-- view products available to all logged-in users -->
                     <li>
                       <a href="viewProducts.php">
                         View Products
                       </a>
                     </li>
-                    <li><a href="manageProducts.php">Manage Products</a></li>
+
+                    <!-- manage products available to all retailers -->
+                    <li <?php if (! isRetailer()){?>style="display:none"<?php } ?>>
+                      <a href="manageProducts.php">
+                        Manage Products
+                      </a>
+                    </li>
+
                   </ul>
                 </li>
-                <li class="dropdown">
+
+                <!-- Orders toggle menu - don't display if not logged in-->
+                <li class="dropdown" id="orders-menu" <?php if (! loggedin()){?>style="display:none"<?php } ?>>
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     Orders
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
+
+                    <!-- view orders available to all logged-in users -->
                     <li>
                       <a href="viewOrders.php">
                         View Orders
-                      </li>
-                    <li>
+                      </a>
+                    </li>
+
+                    <!-- manage orders available to all retailers -->
+                    <li <?php if (! isRetailer()){?>style="display:none"<?php } ?>>
                       <a href="manageOrders.php">
                         Manage Orders
                       </a>
                     </li>
                   </ul>
                 </li>
-                <li>
-                    <a href="profile.php">
+
+                <!-- link to user profile - don't display if not logged in -->
+                <li <?php if (! loggedin()){?>style="display:none"<?php } ?>>
+                    <a href="profile.php" id="profile-menu">
                       Profile
                     </a>
                 </li>
-                <li>
-                    <a href="login.php">
+
+                <!-- user sign out - don't display if not logged in -->
+                <li <?php if (! loggedin()){?>style="display:none"<?php } ?>>
+                    <a href="login.php" id="signout-menu">
+                      <!-- TODO also need to call a query here -->
                       Sign Out
                     </a>
                 </li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
+
     </div>
-    <!-- /.container -->
 </nav>
