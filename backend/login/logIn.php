@@ -40,7 +40,17 @@ if (isset($_POST['Email']) && isset($_POST['Password'])) {
 		if ($result->num_rows > 0) {
 			$PersonId = $result->fetch_assoc()['PersonId'];
 			$_SESSION['PersonId'] = $PersonId;
-			echo "1";
+			
+			$sql2 = "SELECT PersonId FROM Retailers WHERE PersonId='$PersonId'";
+			$result2 = $con->query($sql2);
+
+			if ($result2->num_rows > 0) {
+				$_SESSION['UserType'] = '1';
+				echo "11";
+			}else {
+				$_SESSION['UserType'] = '0';
+				echo "10";
+			}
 		} else {
 			echo "0";
 		}

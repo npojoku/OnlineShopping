@@ -7,12 +7,12 @@ Description: register as a new user
 
 Input:
 	$_POST
-		'FirstName'		(string)
-		'LastName'			(string)
-		'Email'				(string)
-		'Password'			(string)
-		'Phone'		(string)
-		'Address'    	(string)
+		'FirstName'			(string) 
+		'LastName'			(string) 
+		'Email'				(string) 
+		'Password'			(string) 
+		'Phone'				(string) 
+		'Address'    		(string)
 
 Output
 	1						sucessful
