@@ -24,7 +24,7 @@ $errors = array();
 if (!$con) {
   // could not connect to database, redirect to error page
   header("Location: ../../frontend/php/error.php");
-  exit;
+
 } else if(isset($_POST['login'])){
   $hasErrror = false;
 
@@ -48,28 +48,12 @@ if (!$con) {
   // process login request
 	$Email = $_POST['Email'];
 	$Password = $_POST['Password'];
-	$Password_hash = md5($Password);
+  	$Password_hash = md5($Password);
 
-	$sql = "SELECT PersonId FROM Person WHERE Email='$Email' AND Password = '$Password_hash'";
+	$result = loginUser($Email, $Password_hash);
 
-	$result = $con->query($sql);
-
-  // login was successful
-	if ($result->num_rows > 0) {
-    // store session
-		$PersonId = $result->fetch_assoc()['PersonId'];
-		$_SESSION['PersonId'] = $PersonId;
-
-    // assign user type
-		$sql2 = "SELECT PersonId FROM Retailers WHERE PersonId='$PersonId'";
-		$result2 = $con->query($sql2);
-
-		if ($result2->num_rows > 0) {
-			$_SESSION['UserType'] = '1';
-		}else {
-			$_SESSION['UserType'] = '0';
-		}
-
+  if($result){
+    // login was successful
     // forward to product list page
     header("Location: ../../frontend/php/productList.php");
 

@@ -23,11 +23,6 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" name = "Password" placeholder="Password">
                       </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> Remember me
-                        </label>
-                      </div>
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 
@@ -38,6 +33,12 @@
                         <i>Create new account</i>
                       </a>
                     </div>
+
+                    <!-- populate error results from form submission -->
+                    <?php foreach($errors as $err){
+                            echo "$err";
+                          }
+                    ?>
               </div>
 
             </div>

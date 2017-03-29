@@ -20,7 +20,7 @@
             <ul class="nav navbar-nav">
 
               <!-- Products toggle menu - don't display if not logged in-->
-              <li class="dropdown" id="products-menu" <?php if (! loggedin()){?>style="display:none"<?php } ?>>
+              <li class="dropdown" id="products-menu" <?php if (! isLoggedIn()){?>style="display:none"<?php } ?>>
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     Products
                     <span class="caret"></span>
@@ -45,7 +45,7 @@
                 </li>
 
                 <!-- Orders toggle menu - don't display if not logged in-->
-                <li class="dropdown" id="orders-menu" <?php if (! loggedin()){?>style="display:none"<?php } ?>>
+                <li class="dropdown" id="orders-menu" <?php if (! isLoggedIn()){?>style="display:none"<?php } ?>>
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     Orders
                     <span class="caret"></span>
@@ -69,14 +69,14 @@
                 </li>
 
                 <!-- link to user profile - don't display if not logged in -->
-                <li <?php if (! loggedin()){?>style="display:none"<?php } ?>>
+                <li <?php if (! isLoggedIn()){?>style="display:none"<?php } ?>>
                     <a href="profile.php" id="profile-menu">
                       Profile
                     </a>
                 </li>
 
                 <!-- user sign out - don't display if not logged in -->
-                <li <?php if (! loggedin()){?>style="display:none"<?php } ?>>
+                <li <?php if (! isLoggedIn()){?>style="display:none"<?php } ?>>
                     <a href="login.php" id="signout-menu">
                       <!-- TODO also need to call a query here -->
                       Sign Out

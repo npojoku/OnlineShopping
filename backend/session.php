@@ -1,5 +1,5 @@
 <?php
-if (loggedin()) {
+if (isLoggedIn()) {
 	$PersonId = $_SESSION['PersonId'];
 	$UserType = $_SESSION['UserType'];
 } else {
