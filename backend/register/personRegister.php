@@ -50,91 +50,83 @@ if (isset($_POST['register'])) {
 
 	if(!$emptyFields) {
 		$validateError = false;
+
+		// validate first name
 		$FirstName = $_POST['FirstName'];
+
 		if (!preg_match("/^[a-zA-Z ]*$/",$FirstName)) {
 			  $errors[] = '<div class="alert alert-danger" role="alert"><center>Only letter and space allowed in first name!</center></div>';
 				$validateError = true;
-  			//echo '-301';
-  			//exit();
 		}
+
 		if(strlen($FirstName) > 15){
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>First name is too long!</center></div>';
 			$validateError = true;
-  				//echo '-300';
-  				//exit();
   			}
 
+		// validate last name
 		$LastName = $_POST['LastName'];
+
 		if (!preg_match("/^[a-zA-Z ]*$/",$LastName)) {
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Only letter and space allowed in last name!</center></div>';
 			$validateError = true;
-  			//echo '-311';
-  			//exit();
 		}
+
 		if(strlen($LastName) > 15){
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Last name is too long!</center></div>';
 			$validateError = true;
-  				//echo '-310';
-  				//exit();
   		}
 
+		// validate password
 		$Password = $_POST['Password'];
+
 		if( strlen($Password) < 8 || strlen($Password) >20) {
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password length must be 8 - 20!</center></div>';
 			$validateError = true;
-			//echo '-40';
-			//exit();
 		}
+
 		if( preg_match("#\W+#", $Password) ) {
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password contains symbols (No symbol allowed)!</center></div>';
 			$validateError = true;
-			//echo '-41';
-			//exit();
 		}
 
 		if( !preg_match("#[0-9]+#", $Password) ) {
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password must include at least one number!</center></div>';
 			$validateError = true;
-			//echo '-42';
-			//exit();
 		}
+
 		if( !preg_match("#[a-z]+#", $Password) ) {
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password must include at least one lower-case letter!</center></div>';
 			$validateError = true;
-			//echo '-43';
-			//exit();
 		}
+
 		if( !preg_match("#[A-Z]+#", $Password) ) {
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Password must include at least one Upper-case letter!</center></div>';
 			$validateError = true;
-			//echo '-44';
-			//exit();
 		}
+
 		$Password_hash = md5($Password); //hash the Password before saving
 
 		$Email = $_POST['Email'];
 		$Address = $_POST['Address'];
 
+		// validate phone #
 		$Phone = $_POST['Phone'];
 		if(!ctype_digit($Phone)){
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Phone number can only contain number!</center></div>';
 			$validateError = true;
-			//echo '-61';
-			//exit();
 		}
 
 		if(strlen($Phone) != 10){
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Phone number length must be 10!</center></div>';
 			$validateError = true;
-				//echo '-60';
-				//exit();
 			}
 
 
 		if (!$validateError) {
 
 			if (checkDuplicateEmail($con, $Email) || checkDuplicatePhone($con, $Phone)) {
-				echo '-2';
+				$errors[] = '<div class="alert alert-danger" role="alert"><center>This email or phone is already associated with a user.</center></div>';
 			} else {
 				$query = mysqli_prepare($con, "INSERT INTO Person ( FirstName, LastName, Email, Password, Phone, Address)
 						  VALUES (?,?,?,?,?,?)");
@@ -142,15 +134,13 @@ if (isset($_POST['register'])) {
 
 				if ($query->execute()) {
 					if (isset($_POST['retailer'])) {
-					header("Location: http://localhost/cpsc304_project_30/frontend/php/registerRetailer.php");
-					exit();
+						header("Location: ../../frontend/php/registerRetailer.php");
+					} else {
+						header("Location: ../../frontend/php/cardInfo.php");
+					}
+
 				} else {
-					header("Location: http://localhost/cpsc304_project_30/frontend/php/cardInfo.php");
-					exit();
-				}
-					//echo '1';
-				} else {
-					echo '0';
+					header("Location: ../../frontend/php/error.php");
 				}
 			}
 		}
