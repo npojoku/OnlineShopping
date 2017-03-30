@@ -93,6 +93,7 @@ if($retailer){
                         </div>
                       </div>
 
+                      <br>
 
                       <div class="form-group" style="display:block">
                               <table class="table table-bordered table-hover" id="tableAddRow">
@@ -116,9 +117,9 @@ if($retailer){
                           $cardDate = date("Y-m", strtotime($card['CreditExpDate']));
 
                             echo "<tr>";
-                              echo "<td><input type='text' class='form-control' name='CreditCard[]' placeholder='Credit Card #' value='$cardName'></td>";
-                              echo "<td><input type='month' class='form-control' name='CreditExpDate[]' placeholder='Credit Card #' value='$cardDate'></td>";
-                              echo '<td><input type="button" name="DeleteCard" value="-" onclick="removeCard(this)"></input></td>';
+                              echo "<td><input type='text' class='form-control' name='CreditCard[]' placeholder='Credit Card' value='$cardName'></td>";
+                              echo "<td><input type='month' class='form-control' name='CreditExpDate[]' value='$cardDate'></td>";
+                              echo '<td><input type="button" class="btn" name="DeleteCard[]" value="-" onclick="removeCard(this)"></input></td>';
                             echo '</tr>';
                         }
                       }
