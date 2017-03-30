@@ -79,4 +79,8 @@ function logoutUser(){
 	session_destroy();
 	$_SESSION = []; // clear session variables
 }
+
+function getPersonId(){
+	return $_SESSION['PersonId'];
+}
 ?>

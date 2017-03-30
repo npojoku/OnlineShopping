@@ -3,6 +3,7 @@
 include '../../backend/core.inc.php';
 
 global $con;
+
 $errors = array();
 
 // request to add credit card to database for registration
@@ -41,17 +42,19 @@ if(isset($_POST['registerCustomer'])) {
     if (checkDuplicateCard($con, $CreditCard)) {
       $errors[] = '<div class="alert alert-danger" role="alert"><center>This credit card is already registered.</center></div>';
     } else {
+      $PersonId = getPersonId();
       $sql = "INSERT INTO CreditCard(PersonId, CreditCard, CreditExpDate)
         VALUES ('$PersonId','$CreditCard','$CreditExpDate')";
-      echo $sql;
       $query = mysqli_prepare($con, $sql);
 
 
       if ($query->execute()) {
-        //header("Location: ../../frontend/php/viewProducts.php");
+        // if query was a success navigate to home page
+        header("Location: ../../frontend/php/productList.php");
 
       } else {
-        //header("Location: ../../frontend/php/error.php");
+        // if query failed go to error page
+        header("Location: ../../frontend/php/error.php");
       }
 
     }
@@ -59,6 +62,9 @@ if(isset($_POST['registerCustomer'])) {
 }
 
 function checkDuplicateCard($con, $value) {
+  global $con;
+  $PersonId = getPersonId();
+
 	$sql = "SELECT * FROM CreditCard WHERE CreditCard='$value' AND PeronId='$PersonId'";
 
 	$result = $con->query($sql);
