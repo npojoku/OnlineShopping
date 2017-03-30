@@ -1,3 +1,9 @@
+<!-- populate fields with user information -->
+<?php
+$profile = getCustomer();
+$retailer = getRetailer();
+?>
+
 <!-- Page Content -->
 <div class="container">
 
@@ -11,54 +17,54 @@
                         padding-right: 140px;
                         padding-top: 25px;
                         padding-bottom: 25px;">
-                    <h3>Account Settings
+                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Settings
                     </h3>
                    <form class="form-horizontal">
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
-                          <input type="Email" class="form-control" id="inputEmail" placeholder="Email">
+                          <input type="Email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo $profile['Email']; ?>">
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label for="inputPassword" class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
-                          <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                          <input type="password" class="form-control" id="inputPassword" placeholder="Password" value="<?php echo $profile['Password']; ?>">
                         </div>
                       </div>
 
                     <div class="form-group">
                         <label for="inputFirstName" class="col-sm-3 control-label" style=" padding-left: 0px; padding-right: 0px;">First Name</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                          <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" value="<?php echo $profile['FirstName']; ?>">
                         </div>
                       </div>
 
                     <div class="form-group">
                         <label for="inputLastName" class="col-sm-3 control-label" style=" padding-left: 0px; padding-right: 0px;">Last Name</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                          <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" value="<?php echo $profile['LastName']; ?>">
                         </div>
                       </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Phone</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+                          <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="<?php echo $profile['Phone']; ?>">
                         </div>
                       </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Address</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                          <input type="text" class="form-control" id="inputAddress" placeholder="Address" value="<?php echo $profile['Address']; ?>">
                         </div>
                       </div>
 
                       <div class="checkbox" style="margin-left: 140px;">
                         <label>
-                          <input type="checkbox" name = "registerAsRetailer" onclick="showRetailerRegister('retailerRegister')"> Registered as Retailer
+                          <input type="checkbox" name = "registerAsRetailer" onclick="showRetailerRegister('retailerRegister')"> Register as Retailer
                         </label>
                       </div>
 
@@ -81,7 +87,7 @@
 
                     </form>
 
-                    <form class="form-horizontal">
+                <!--    <form class="form-horizontal">
                     	<div class="row">
                               <table class="table table-bordered table-hover" id="tableAddRow">
                                   <thead>
@@ -100,6 +106,7 @@
                                   </tbody>
                               </table>
                         </div>
+                      </form>-->
                     </div>
 
                 </div>

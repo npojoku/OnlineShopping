@@ -1,7 +1,7 @@
 <DOCTYPE html>
 
 <?php require '../../backend/core.inc.php'; ?>
-<?php include('../../backend/register/personRegister.php'); ?>
+<?php include('../../backend/register/registerPerson.php'); ?>
 
 <html>
 <!-- header -->

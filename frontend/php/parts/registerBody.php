@@ -61,7 +61,7 @@
 
                       <div class="checkbox" style="margin-left: 140px;">
                         <label>
-                          <input type="checkbox" name = "registerAsRetailer" onclick="showRetailerRegister('retailerRegister')"> Registered as Retailer
+                          <input type="checkbox" name = "registerAsRetailer" onclick="showRetailerRegister('retailerRegister')"> Register as Retailer
                         </label>
                       </div>
 

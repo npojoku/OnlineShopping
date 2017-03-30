@@ -1,6 +1,6 @@
 <DOCTYPE html>
 
-<?php include('../../backend/register/cardRegister.php'); ?>
+<?php include('../../backend/register/registerCard.php'); ?>
 
 <html>
 <!-- header -->
