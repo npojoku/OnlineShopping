@@ -139,7 +139,7 @@ if (isset($_POST['register'])) {
 					if (isset($_POST['retailer'])) {
 						header("Location: ../../frontend/php/registerRetailer.php");
 					} else {
-						header("Location: ../../frontend/php/cardInfo.php");
+						header("Location: ../../frontend/php/registerCustomer.php");
 					}
 
 				} else {

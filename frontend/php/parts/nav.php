@@ -77,8 +77,8 @@
 
                 <!-- user sign out - don't display if not logged in -->
                 <li <?php if (! isLoggedIn()){?>style="display:none"<?php } ?>>
+                    <!-- login backend will automatically sign out if it does not get a log in request -->
                     <a href="login.php" id="signout-menu">
-                      <!-- TODO also need to call a query here -->
                       Sign Out
                     </a>
                 </li>

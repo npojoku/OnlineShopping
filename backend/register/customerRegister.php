@@ -5,8 +5,8 @@ $errors = array();
 
 // request to add credit card to database for registration
 // TODO add more cases here for user profile page
-if(isset($_POST['cardInfo'])) {
-  $hasErrror = false;
+if(isset($_POST['registerCustomer'])) {
+  $hasError = false;
   $CreditCard = $_POST['CreditCard'];
   $CreditExpDate = $_POST['CreditExpDate'];
 

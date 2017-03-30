@@ -14,7 +14,7 @@
                     <h3>Log In
                     </h3>
                     <br>
-                   <form action = "../../backend/login/logIn.php" method = "post">
+                   <form action = "login.php" method = "post">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control" name = "Email" placeholder="Email">
@@ -23,7 +23,7 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" name = "Password" placeholder="Password">
                       </div>
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" name="login" class="btn btn-primary">Submit</button>
                     </form>
 
                     <!-- new user register -->
@@ -36,8 +36,8 @@
 
                     <!-- populate error results from form submission -->
                     <?php foreach($errors as $err){
-                            echo "$err";
-                          }
+                      echo "$err";
+                    }
                     ?>
               </div>
 

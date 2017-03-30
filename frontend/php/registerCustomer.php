@@ -2,7 +2,7 @@
 
 <?php $title = 'Scythian'; ?>
 <?php require '../../backend/core.inc.php'; ?>
-<?php include('../../backend/account/addCreditCard.php'); ?>
+<?php include('../../backend/register/customerRegister.php'); ?>
 
 <html>
 <!-- header -->

@@ -12,6 +12,11 @@ $current_file = $_SERVER['SCRIPT_NAME'];
 
 $con = new mysqli($mysql_host, $mysql_Person, $mysql_pass, $mysql_db);
 
+function isConnected() {
+	global $con;
+	return $con->ping();
+}
+
 function isLoggedIn() {
 	if (isset($_SESSION['PersonId']) && !empty($_SESSION['PersonId'])) {
 		return true;
@@ -50,6 +55,7 @@ function loginUser($Email, $Password_hash){
 
 	// login was successful
 	if ($result->num_rows > 0) {
+
 		// store session
 		$PersonId = $result->fetch_assoc()['PersonId'];
 		$_SESSION['PersonId'] = $PersonId;
@@ -67,5 +73,10 @@ function loginUser($Email, $Password_hash){
 	}
 
 	return false;
+}
+
+function logoutUser(){
+	session_destroy();
+	$_SESSION = []; // clear session variables
 }
 ?>
