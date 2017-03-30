@@ -2,6 +2,7 @@
 
 <?php $title = 'Scythian'; ?>
 <?php require '../../backend/core.inc.php'; ?>
+<?php include('../../backend/account/retailerRegister.php'); ?>
 
 <html>
 <!-- header -->

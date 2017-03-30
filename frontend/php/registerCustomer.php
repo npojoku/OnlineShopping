@@ -1,7 +1,7 @@
 <DOCTYPE html>
 
 <?php $title = 'Scythian'; ?>
-<?php require '../../backend/core.inc.php'; ?>
+<?php include('../../backend/register/customerRegister.php'); ?>
 
 <html>
 <!-- header -->
@@ -13,7 +13,7 @@
 <?php include('parts/nav.php'); ?>
 
 <!-- body -->
-<?php include('parts/cardInfoBody.php'); ?>
+<?php include('parts/registerCustomerBody.php'); ?>
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>

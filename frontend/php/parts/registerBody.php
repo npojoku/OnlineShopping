@@ -59,10 +59,11 @@
                       <br>
                       <button type="submit" class="btn btn-primary" name="register" style="margin-left: 200px;">Submit</button>
                     </form>
+
                     <?php foreach($errors as $err){
                        echo "$err";
                     }
-              ?>
+                    ?>
                 </div>
             </div>
         </div>

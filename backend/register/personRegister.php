@@ -113,14 +113,14 @@ if (isset($_POST['register'])) {
 		// validate phone #
 		$Phone = $_POST['Phone'];
 		if(!ctype_digit($Phone)){
-			$errors[] = '<div class="alert alert-danger" role="alert"><center>Phone number can only contain number!</center></div>';
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Phone number can only contain numbers!</center></div>';
 			$validateError = true;
 		}
 
 		if(strlen($Phone) != 10){
 			$errors[] = '<div class="alert alert-danger" role="alert"><center>Phone number length must be 10!</center></div>';
 			$validateError = true;
-			}
+		}
 
 
 		if (!$validateError) {
@@ -133,10 +133,13 @@ if (isset($_POST['register'])) {
 				$query->bind_param("ssssis", $FirstName, $LastName, $Email, $Password_hash, $Phone, $Address);
 
 				if ($query->execute()) {
+					// login to website
+					loginUser($Email, $Password_hash);
+
 					if (isset($_POST['retailer'])) {
 						header("Location: ../../frontend/php/registerRetailer.php");
 					} else {
-						header("Location: ../../frontend/php/cardInfo.php");
+						header("Location: ../../frontend/php/registerCustomer.php");
 					}
 
 				} else {

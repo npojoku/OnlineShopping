@@ -8,12 +8,12 @@ Description: register as a new retailer
 
 Input:
 		$_POST
-			'ShopName'		(string) 
-			'DepositAccount'	(string) 
+			'ShopName'		(string)
+			'DepositAccount'	(string)
 Output
 		1				successful
 
-		
+
 Error:
 	0						failed
 	-1						no session
@@ -22,6 +22,31 @@ Error:
 */
 
 global $con;
+$errors = array();
+
+// request to register retailer
+if(isset($_POST['registerRetailer'])) {
+	$hasError = false;
+
+	// verify shop name
+	if(!isset($_POST['ShopName']) || empty($_POST['ShopName'])){
+		$errors[] = '<div class="alert alert-danger" role="alert"><center>Please include your vendor name.</center></div>';
+		$hasError = true;
+	} else {
+		// TODO more checking
+	}
+
+	// verify deposit account
+	if(!isset($_POST['DepositAccount']) || empty($_POST['DepositAccount'])){
+		$errors[] = '<div class="alert alert-danger" role="alert"><center>Please include your direct deposit number for earnings.</center></div>';
+		$hasError = true;
+	} else {
+		// TODO more checking
+	}
+
+
+// TODO refactoring from here
+
 if (isset($_POST['ShopName'])&&
 	isset($_POST['DepositAccount'])) {
 
@@ -61,6 +86,3 @@ function checkDuplicateShopName($con, $value) {
 }
 
 ?>
-
-
-
