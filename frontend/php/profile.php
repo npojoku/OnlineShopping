@@ -2,6 +2,7 @@
 
 <?php include '../../backend/profile/getCustomer.php'; ?>
 <?php include '../../backend/profile/getRetailer.php'; ?>
+<?php include '../../backend/account/getCardList.php'; ?>
 <?php include '../../backend/profile/updatePerson.php'; ?>
 
 <html>

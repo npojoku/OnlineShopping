@@ -2,6 +2,7 @@
 <?php
 $profile = getCustomer();
 $retailer = getRetailer();
+$cardList = getCardList();
 
 // decide visibility of retailer
 if($retailer){
@@ -11,6 +12,7 @@ if($retailer){
   $retailCheck = "display:block";
   $retailFields = "display:none";
 }
+
 ?>
 
 <!-- Page Content -->
@@ -91,6 +93,43 @@ if($retailer){
                         </div>
                       </div>
 
+
+                      <div class="form-group">
+                              <table class="table table-bordered table-hover" id="tableAddRow">
+                                  <thead>
+                                      <tr>
+                                          <th><label class="control-label">Credit Card number #</label></th>
+                                          <th><label class="control-label">Credit Expiration Date</label></th>
+                                          <th style="width:10px"><span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span></th>
+                                      </tr>
+                                    </thead>
+
+                      <!-- populate dynamic list of cards -->
+                      <?php
+                      $displayCardId = 0; // also used to add new rows
+
+                      if ($cardList->num_rows > 0){
+
+                        while ( $card = mysqli_fetch_array($cardList, MYSQLI_ASSOC) ) {
+                          $cardName = $card['CreditCard'];
+                          $cardDate = date("Y-m", strtotime($card['CreditExpDate']));
+
+                          echo '<tbody>';
+                            echo "<tr id='$displayCardId'>";
+                              echo "<td><input type='text' class='form-control' name='CreditCard_$displayCardId' placeholder='Credit Card #' value='$cardName'></td>";
+                              echo "<td><input type='month' class='form-control' name='CreditExpDate_$displayCardId' placeholder='Credit Card #' value='$cardDate'></td>";
+                              echo '<td><span class="glyphicon glyphicon-minus addBtnRemove" id="addBtnRemove_0"></span></td>';
+                            echo '</tr>';
+                          echo '</tbody>';
+
+                          $displayCardId += 1;
+                        }
+                      }
+
+                       ?>
+                        </table>
+                      </div>
+
                       <br>
                       <button type="submit" class="btn btn-primary" name="updatePerson" style="margin-left: 200px;">Update Profile</button>
 
@@ -102,27 +141,6 @@ if($retailer){
                     }
                     ?>
 
-                <!--    <form class="form-horizontal">
-                    	<div class="row">
-                              <table class="table table-bordered table-hover" id="tableAddRow">
-                                  <thead>
-                                      <tr>
-                                          <th>Credit Card #</th>
-                                          <th>CreditExpDate</th>
-                                          <th style="width:10px"><span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span></th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr id="tr_0">
-                                          <td><input type="text" id="creditCard#" class="form-control"/></td>
-                                          <td><input type="text" id="creditExpDate" class="form-control" /></td>
-                                          <td><span class="glyphicon glyphicon-minus addBtnRemove" id="addBtnRemove_0"></span></td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                        </div>
-                      </form>-->
-                    </div>
 
                 </div>
             </div>
