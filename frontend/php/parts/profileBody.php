@@ -94,19 +94,20 @@ if($retailer){
                       </div>
 
 
-                      <div class="form-group">
+                      <div class="form-group" style="display:block">
                               <table class="table table-bordered table-hover" id="tableAddRow">
                                   <thead>
                                       <tr>
                                           <th><label class="control-label">Credit Card number #</label></th>
                                           <th><label class="control-label">Credit Expiration Date</label></th>
-                                          <th style="width:10px"><span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span></th>
+                                          <th style="width:10px">
+                                            <span class="glyphicon glyphicon-plus btn" onclick="addTableRow(this)"></span></th>
                                       </tr>
                                     </thead>
+                                    <tbody>
 
                       <!-- populate dynamic list of cards -->
                       <?php
-                      $displayCardId = 0; // also used to add new rows
 
                       if ($cardList->num_rows > 0){
 
@@ -114,19 +115,15 @@ if($retailer){
                           $cardName = $card['CreditCard'];
                           $cardDate = date("Y-m", strtotime($card['CreditExpDate']));
 
-                          echo '<tbody>';
-                            echo "<tr id='$displayCardId'>";
-                              echo "<td><input type='text' class='form-control' name='CreditCard_$displayCardId' placeholder='Credit Card #' value='$cardName'></td>";
-                              echo "<td><input type='month' class='form-control' name='CreditExpDate_$displayCardId' placeholder='Credit Card #' value='$cardDate'></td>";
-                              echo '<td><span class="glyphicon glyphicon-minus addBtnRemove" id="addBtnRemove_0"></span></td>';
+                            echo "<tr>";
+                              echo "<td><input type='text' class='form-control' name='CreditCard[]' placeholder='Credit Card #' value='$cardName'></td>";
+                              echo "<td><input type='month' class='form-control' name='CreditExpDate[]' placeholder='Credit Card #' value='$cardDate'></td>";
+                              echo '<td><input type="button" name="DeleteCard" value="-" onclick="removeCard(this)"></input></td>';
                             echo '</tr>';
-                          echo '</tbody>';
-
-                          $displayCardId += 1;
                         }
                       }
-
                        ?>
+                     </tbody>
                         </table>
                       </div>
 

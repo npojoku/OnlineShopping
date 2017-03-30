@@ -1,22 +1,37 @@
+// if user clicks card remove, hide from display
 $(document).ready(function () {
-    $('.addBtn').on('click', function () {
-        //var trID;
-        //trID = $(this).closest('tr'); // table row ID
+     $('.cardBtnRemove').click(function () {
+       // hide table entry
+        $(this).closest('tr').style.display ="none";
+    });
+
+    $('.cardBtn').on('click', function () {
+        // if user clicks a button add new entry with next id number
         addTableRow();
     });
-     $('.addBtnRemove').click(function () {
-        $(this).closest('tr').remove();
-    })
-    var i = 1;
-    function addTableRow()
-    {
-        var tempTr = $('<tr><td><input type="text" id="userName_' + i + '" class="form-control"/></td><td><input type="text" id="email_' + i + '" class="form-control" /></td><td><input type="text" id="password_' + i + '" class="form-control" /></td><td><span class="glyphicon glyphicon-minus addBtnRemove" id="addBtn_' + i + '"></span></td></tr>').on('click', function () {
-           $(this).closest('tr').remove();
-           $(document.body).on('click', '.TreatmentHistoryRemove', function (e) {
-                $(this).closest('tr').remove();
-            });
-        });
-        $("#tableAddRow").append(tempTr)
-        i++;
-    }
+
+
 });
+
+
+function removeCard(el){
+  el.parentNode.parentNode.style.display='none';
+  // value true indicates to backend that this card should be deleted
+  el.value='true';
+}
+
+function addTableRow(el)
+{
+  var table = el.parentNode.parentNode.parentNode;
+
+  // insert row
+  table.insertRow(0);
+  //
+  // // insert columns
+  // var creditCardCell = row.insertCell(0);
+  // var creditNumberCell = row.insertCell(1);
+  // var buttonCell = row.insertCell(1);
+
+  // populate credit card column
+
+}
