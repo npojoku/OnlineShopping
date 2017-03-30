@@ -1,8 +1,8 @@
 <DOCTYPE html>
 
-<?php require '../../backend/core.inc.php'; ?>
 <?php include '../../backend/profile/getCustomer.php'; ?>
 <?php include '../../backend/profile/getRetailer.php'; ?>
+<?php include '../../backend/profile/updatePerson.php'; ?>
 
 <html>
 <!-- header -->

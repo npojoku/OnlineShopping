@@ -67,7 +67,6 @@ if (isset($_POST['register'])) {
 								// redirect to error page on error
 								header("Location: ../../frontend/php/error.php");
 						}
-
 				}
 
 					header("Location: ../../frontend/php/registerCard.php");

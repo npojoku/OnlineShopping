@@ -1,4 +1,6 @@
 <?php
+
+include '../../backend/core.inc.php';
 /*
   Function library validating all atributes
   associated to a customer or retailer
@@ -15,7 +17,7 @@ function areCustomerFieldsEmpty(& $errors, $isRetailer){
 
   // verify retailer fields
   if($isRetailer) {
-    return areRetailerFieldsEmpty($errors[]);
+    return areRetailerFieldsEmpty($errors);
   }
 
   return false;
@@ -63,6 +65,20 @@ function isLastNameValid(& $errors, $LastName){
   }
 
   return true;
+}
+
+function isPasswordChanged($con, $Password){
+  // if the only duplicate row it finds is itself, there are no duplicates
+  if(isLoggedIn()) {
+    $PersonId = getPersonId();
+
+    $sql = "SELECT Password FROM Person WHERE PersonId='$PersonId'";
+
+    $result = $con->query($sql);
+
+    if($result->fetch_assoc()['Password'] != $Password) return true;
+  }
+  return false;
 }
 
 function isPasswordValid(& $errors, $Password){
@@ -122,12 +138,14 @@ function hasDuplicateEmail(& $errors, $con, $value) {
 
 	$result = $con->query($sql);
 
-	if ($result->num_rows > 0) {
-    $errors[] = '<div class="alert alert-danger" role="alert"><center>This email is associated with a user.</center></div>';
-		return true;
-	} else {
-		return false;
-	}
+  if ($result->num_rows > 0) {
+    if(objectIsNotPerson($con, $result)){
+      $errors[] = '<div class="alert alert-danger" role="alert"><center>This email is associated with a user.</center></div>';
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function hasDuplicatePhone(& $errors, $con, $value) {
@@ -136,11 +154,12 @@ function hasDuplicatePhone(& $errors, $con, $value) {
 	$result = $con->query($sql);
 
 	if ($result->num_rows > 0) {
-    $errors[] = '<div class="alert alert-danger" role="alert"><center>This phone number is associated with a user.</center></div>';
-		return true;
-	} else {
-		return false;
+    if(objectIsNotPerson($con, $result)){
+      $errors[] = '<div class="alert alert-danger" role="alert"><center>This phone number is associated with a user.</center></div>';
+  		return true;
+    }
 	}
+	return false;
 }
 
 function hasDuplicateShopName(& $errors, $con, $value) {
@@ -149,10 +168,29 @@ function hasDuplicateShopName(& $errors, $con, $value) {
 	$result = $con->query($sql);
 
 	if ($result->num_rows > 0) {
-    $errors[] = '<div class="alert alert-danger" role="alert"><center>This shop name is associated with a user.</center></div>';
-		return true;
-	} else {
-		return false;
+    if(objectIsNotPerson($con, $result)){
+      $errors[] = '<div class="alert alert-danger" role="alert"><center>This shop name is associated with a user.</center></div>';
+  		return true;
+    }
 	}
+	return false;
+}
+
+// helper function for hasDuplicates
+function objectIsNotPerson($con, & $result){
+  // if the only duplicate row it finds is itself, there are no duplicates
+  if(isLoggedIn()) {
+
+    $PersonId = getPersonId();
+
+    while($row = $result->fetch_assoc()) {
+      if($row['PersonId'] != $PersonId){
+        $errors[] = '<div class="alert alert-danger" role="alert"><center>This email is associated with a user.</center></div>';
+        return true;
+      }
+    }
+    return false;
+  }
+  return true;
 }
 ?>

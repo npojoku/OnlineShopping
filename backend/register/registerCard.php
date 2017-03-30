@@ -1,5 +1,4 @@
 <?php
-include '../../backend/core.inc.php';
 include '../../backend/validation/cardValidationLibrary.php';
 
 global $con;

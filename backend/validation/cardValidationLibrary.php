@@ -1,5 +1,7 @@
 <?php
 
+include '../../backend/core.inc.php';
+
 function areCardFieldsEmpty(& $errors){
   // verify email has been entered
   if(!isset($_POST['CreditCard']) || empty($_POST['CreditCard'])){
