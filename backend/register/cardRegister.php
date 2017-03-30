@@ -8,7 +8,7 @@ $errors = array();
 
 // request to add credit card to database for registration
 // TODO add more cases here for user profile page
-if(isset($_POST['registerCustomer'])) {
+if(isset($_POST['registerCard'])) {
   $hasError = false;
   $CreditCard = $_POST['CreditCard'];
   $CreditExpDate = $_POST['CreditExpDate'];
@@ -44,7 +44,8 @@ if(isset($_POST['registerCustomer'])) {
     } else {
       $PersonId = getPersonId();
       $sql = "INSERT INTO CreditCard(PersonId, CreditCard, CreditExpDate)
-        VALUES ('$PersonId','$CreditCard','$CreditExpDate')";
+        VALUES ('$PersonId','$CreditCard',STR_TO_DATE('$CreditExpDate','%Y-%m'))";
+
       $query = mysqli_prepare($con, $sql);
 
 
@@ -65,7 +66,7 @@ function checkDuplicateCard($con, $value) {
   global $con;
   $PersonId = getPersonId();
 
-	$sql = "SELECT * FROM CreditCard WHERE CreditCard='$value' AND PeronId='$PersonId'";
+	$sql = "SELECT * FROM CreditCard WHERE CreditCard='$value' AND PersonId='$PersonId'";
 
 	$result = $con->query($sql);
 

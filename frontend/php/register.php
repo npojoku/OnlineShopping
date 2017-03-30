@@ -25,5 +25,10 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
 
+<!-- customer javascript for retailer registration -->
+<script src="../js/showRetailRegister.js"></script>
+
+
+
 </body>
 </html>
