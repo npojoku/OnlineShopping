@@ -2,6 +2,15 @@
 <?php
 $profile = getCustomer();
 $retailer = getRetailer();
+
+// decide visibility of retailer
+if($retailer){
+  $retailCheck = "display:none";
+  $retailFields = "display:block";
+} else {
+  $retailCheck = "display:block";
+  $retailFields = "display:none";
+}
 ?>
 
 <!-- Page Content -->
@@ -62,23 +71,23 @@ $retailer = getRetailer();
                         </div>
                       </div>
 
-                      <div class="checkbox" style="margin-left: 140px;">
+                      <div class="checkbox" style="margin-left: 140px; <?php echo $retailCheck; ?>">
                         <label>
                           <input type="checkbox" name = "registerAsRetailer" onclick="showRetailerRegister('retailerRegister')"> Register as Retailer
                         </label>
                       </div>
 
-                      <div class="form-group retailerRegister" style="display:none">
+                      <div class="form-group retailerRegister" style="<?php echo $retailFields; ?>">
                         <label class="col-sm-3 control-label">Shop Name</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" name="ShopName" placeholder="Shop Name">
+                          <input type="text" class="form-control" name="ShopName" placeholder="Shop Name" value="<?php echo $retailer['ShopName']; ?>">
                         </div>
                       </div>
 
-                      <div class="form-group retailerRegister" style="display:none">
+                      <div class="form-group retailerRegister" style="<?php echo $retailFields; ?>">
                         <label for="inputPassword" class="col-sm-3 control-label">Deposit Account</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" name="DepositAccount" placeholder="Deposit Account">
+                          <input type="text" class="form-control" name="DepositAccount" placeholder="Deposit Account" value="<?php echo $retailer['DepositAccount']; ?>">
                         </div>
                       </div>
 
