@@ -16,7 +16,7 @@
 
                     <br>
 
-                    <form class="form-horizontal" action = "../php/registerCustomer.php" method = "post">
+                    <form class="form-horizontal" action = "../php/registerCard.php" method = "post">
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Credit Card</label>
                         <div class="col-sm-7">
@@ -30,7 +30,7 @@
                         </div>
                       </div>
                       <br>
-                      <button type="submit" class="btn btn-primary" name="registerCustomer" style="margin-left: 200px;">Submit</button>
+                      <button type="submit" class="btn btn-primary" name="registerCard" style="margin-left: 200px;">Submit</button>
                     </form>
 
                     <!-- skip card information -->

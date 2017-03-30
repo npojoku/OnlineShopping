@@ -61,18 +61,27 @@ function loginUser($Email, $Password_hash){
 		$_SESSION['PersonId'] = $PersonId;
 
 		// assign user type
-		$sql2 = "SELECT PersonId FROM Retailers WHERE PersonId='$PersonId'";
-		$result2 = $con->query($sql2);
+		setUserType();
 
-		if ($result2->num_rows > 0) {
-			$_SESSION['UserType'] = '1';
-		}else {
-			$_SESSION['UserType'] = '0';
-		}
 		return true;
 	}
 
 	return false;
+}
+
+function setUserType(){
+	global $con;
+
+	$PersonId = $_SESSION['PersonId'];
+
+	$sql = "SELECT PersonId FROM Retailers WHERE PersonId='$PersonId'";
+	$result = $con->query($sql);
+
+	if ($result->num_rows > 0) {
+		$_SESSION['UserType'] = '1';
+	}else {
+		$_SESSION['UserType'] = '0';
+	}
 }
 
 function logoutUser(){

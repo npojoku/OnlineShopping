@@ -38,6 +38,9 @@ global $con;
 $errors = array();
 if (isset($_POST['register'])) {
 
+	// user is registering as a customer
+	$isRetailer = isset($_POST['registerAsRetailer']);
+
 	$fields = array('FirstName', 'LastName', 'Email', 'Password', 'Phone', 'Address');
 	$emptyFields = false;
 	foreach($fields AS $fieldname) {
@@ -46,6 +49,21 @@ if (isset($_POST['register'])) {
 	    $emptyFields = true;
       break;
 	  }
+	}
+
+	if($isRetailer && !$emptyFields){
+		// verify empty retailer fields
+		// verify email has been entered
+		if(!isset($_POST['ShopName']) || empty($_POST['ShopName'])){
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Please fill in all the fields!</center></div>';
+			$emptyFields = true;
+		}
+
+		// verify password has been entered
+		if(!isset($_POST['DepositAccount']) || empty($_POST['DepositAccount'])){
+			$errors[] = '<div class="alert alert-danger" role="alert"><center>Please fill in all the fields!</center></div>';
+			$emptyFields = true;
+		}
 	}
 
 	if(!$emptyFields) {
@@ -122,11 +140,22 @@ if (isset($_POST['register'])) {
 			$validateError = true;
 		}
 
+		// validate retailer fields
+		$ShopName = $_POST['ShopName'];
+		$DepositAccount = $_POST['DepositAccount'];
+		if($isRetailer){
+			if(! (strlen($DepositAccount) >= 9 && strlen($DepositAccount) <= 17)){
+				$errors[] = '<div class="alert alert-danger" role="alert"><center>Deposit account number is an invalid length.</center></div>';
+				$validateError = true;
+			}
+		}
 
 		if (!$validateError) {
 
 			if (checkDuplicateEmail($con, $Email) || checkDuplicatePhone($con, $Phone)) {
-				$errors[] = '<div class="alert alert-danger" role="alert"><center>This email or phone is already associated with a user.</center></div>';
+				$errors[] = '<div class="alert alert-danger" role="alert"><center>This email or phone is associated with a user.</center></div>';
+			} else if(checkDuplicateShopName($con, $ShopName)){
+				$errors[] = '<div class="alert alert-danger" role="alert"><center>This shop name is associated with a user.</center></div>';
 			} else {
 				$query = mysqli_prepare($con, "INSERT INTO Person ( FirstName, LastName, Email, Password, Phone, Address)
 						  VALUES (?,?,?,?,?,?)");
@@ -136,11 +165,17 @@ if (isset($_POST['register'])) {
 					// login to website
 					loginUser($Email, $Password_hash);
 
-					if (isset($_POST['retailer'])) {
-						header("Location: ../../frontend/php/registerRetailer.php");
-					} else {
-						header("Location: ../../frontend/php/registerCustomer.php");
+					if($isRetailer){
+						if(!setRetailerInformation($ShopName, $DepositAccount)){
+								// redirect to error page on error
+								header("Location: ../../frontend/php/error.php");
+						}
+
+						// set session user type
+						setUserType();
 					}
+
+					header("Location: ../../frontend/php/registerCard.php");
 
 				} else {
 					header("Location: ../../frontend/php/error.php");
@@ -172,6 +207,33 @@ function checkDuplicatePhone($con, $value) {
 	} else {
 		return false;
 	}
+}
+
+function checkDuplicateShopName($con, $value) {
+	$sql = "SELECT * FROM `Retailers` WHERE `ShopName`='$value'";
+
+	$result = $con->query($sql);
+
+	if ($result->num_rows > 0) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function setRetailerInformation($ShopName, $DepositAccount){
+	global $con;
+	$PersonId = getPersonId();
+
+	$sql = "INSERT INTO Retailers (PersonId, ShopName, DepositAccount)
+						VALUES ('$PersonId','$ShopName','$DepositAccount')";
+
+	$query = mysqli_prepare($con, $sql);
+
+	if($query->execute()){
+		return true;
+	}
+	return false;
 }
 
 ?>
