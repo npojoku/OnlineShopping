@@ -1,5 +1,7 @@
 <?php
 
+include '../../backend/core.inc.php';
+
 global $con;
 $errors = array();
 
