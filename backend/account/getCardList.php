@@ -6,7 +6,7 @@ function getCardList(){
 
   $PersonId = getPersonId();
   // return mysql object
-  $query = "SELECT CreditCard, CreditExpDate
+  $query = "SELECT CardId, CreditCard, CreditExpDate
     FROM CreditCard WHERE PersonId=$PersonId";
 
   $obj = mysqli_query($con, $query);

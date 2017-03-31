@@ -17,7 +17,7 @@ Error:
 	-1
 	-7						required field not set
 */
-include '../../backend/core.inc.php';
+include_once '../../backend/core.inc.php';
 
 
 global $con;

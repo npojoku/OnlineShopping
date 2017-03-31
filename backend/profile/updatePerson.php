@@ -1,7 +1,9 @@
 <?php
 /* update changed personal information of current user */
 include '../../backend/validation/personValidationLibrary.php';
+include '../../backend/validation/cardValidationLibrary.php';
 include 'addRetailer.php';
+include '../../backend/account/updateCardList.php';
 
 global $con;
 $errors = array();
@@ -15,8 +17,11 @@ if(isset($_POST['updatePerson'])){
 
   // make sure no fields are empty
   $hasEmptyFields = areCustomerFieldsEmpty($errors, $isAddRetailer || $isUpdateRetailer);
+  $hasEmptyFields |= areCardFieldsEmpty($errors);
+  $hasEmptyFields |= isCardIdEmpty($errors);
 
   if(!$hasEmptyFields) {
+
     $isValid = true;
 
     // validate first name
@@ -51,6 +56,14 @@ if(isset($_POST['updatePerson'])){
       $isValid &= isDepositAccountValid($errors, $DepositAccount);
     }
 
+    // validate credit card fields
+    $CreditIdList[] = $_POST['CardId'];
+    $CreditCardList[] = $_POST['CreditCard'];
+    $CreditExpDateList[] = $_POST['CreditExpDate'];
+
+
+    $isValid &= isCreditCardListValid($errors, $CreditCardList);
+
     if($isValid){
       if (!hasDuplicateEmail($errors, $con, $Email) &&
         !hasDuplicatePhone($errors, $con, $Phone) &&
@@ -67,6 +80,9 @@ if(isset($_POST['updatePerson'])){
           // add retailer profile for this user
           $result = addRetailer($con, $ShopName, $DepositAccount);
         }
+
+        // update credit card table
+        $result = updateCardList($con, $CreditIdList, $CreditCardList, $CreditExpDateList);
 
         if(!$result) header("Location: ../../frontend/php/error.php");
       }

@@ -1,5 +1,6 @@
 <?php
 include '../../backend/validation/cardValidationLibrary.php';
+include '../../backend/account/addCard.php';
 
 global $con;
 $errors = array();
@@ -18,14 +19,7 @@ if(isset($_POST['registerCard'])) {
       // add credit card to account
       if (!hasDuplicateCard($errors, $con, $CreditCard)) {
 
-        $PersonId = getPersonId();
-        $sql = "INSERT INTO CreditCard(PersonId, CreditCard, CreditExpDate)
-          VALUES ('$PersonId','$CreditCard',STR_TO_DATE('$CreditExpDate','%Y-%m'))";
-
-        $query = mysqli_prepare($con, $sql);
-
-
-        if ($query->execute()) {
+        if (addCard($con, $CreditCard, $CreditExpDate)) {
           // if query was a success navigate to home page
           header("Location: ../../frontend/php/productList.php");
 

@@ -1,6 +1,6 @@
 <?php
 
-include '../../backend/core.inc.php';
+include_once '../../backend/core.inc.php';
 /*
   Function library validating all atributes
   associated to a customer or retailer
