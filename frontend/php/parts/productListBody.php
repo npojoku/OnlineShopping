@@ -88,7 +88,7 @@ if ($result=mysqli_query($con,$sql))
     echo "<td> Used </td>";
   } else {
     echo "<td> New </td>";
-  };
+  }
   echo ("
     <td>$row[Price]</td>
     <td>$row[Quantity]</td>

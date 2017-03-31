@@ -11,20 +11,91 @@
    }
  }
     ?>
-<div class="container">
+<div class="container" style="width:65%">
 
-              <div class="col-md-7 col-md-offset-2">
 
-                  <h3><?php echo "$data[ProductName]"; ?></h3>
-                  <br>
-                  <p> <?php echo "Description: $data[ProductDescription]" ?> </p>
-                  <p> <?php if ($data['Type'] == 0) {
-                    echo "<p> Type: Used </p>";
-                  } else {
-                      echo "<p> Type: New </p>";
+
+        <div class="thumbnail">
+
+            <div class="caption-full">
+                <h3 class="pull-right">$<?php echo "$data[Price]"; ?></h3>
+                <h3><?php echo "$data[ProductName]"; ?>
+                </h3>
+                <hr>
+                <p> <?php echo "&nbsp;&nbsp;Description: $data[ProductDescription]" ?> </p>
+                 <p> <?php if ($data['Type'] == 0) {
+                   echo "<p>&nbsp;&nbsp;Type: Used </p>";
+                 } else {
+                     echo "<p>&nbsp;&nbsp;Type: New </p>";
+                 }
+                 ?>
+                <p> <?php echo "&nbsp;&nbsp;Quantity Available: $data[Quantity]" ?> </p>
+
+                <div class="ratings">
+                  <?php
+                  if ($data['Rating'] == null) {
+                    echo "No one has rated this item yet!";
+                  } else if ($data['Rating'] >= 0 && $data['Rating'] <= 1) {
+                    echo "<p>";
+                    echo "<span>";
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo $data['Rating'];
+                    echo '</p>';
+                  } else if ($data['Rating'] >= 1 && $data['Rating'] <= 2) {
+                    echo "<p>";
+                    echo "<span>";
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo $data['Rating'];
+                    echo '</p>';
+                  } else if ($data['Rating'] >= 2 && $data['Rating'] <= 3) {
+                    echo "<p>";
+                    echo "<span>";
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo $data['Rating'];
+                    echo '</p>';
+                  }else if ($data['Rating'] >= 3 && $data['Rating'] <= 4) {
+                    echo "<p>";
+                    echo "<span>";
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                    echo $data['Rating'];
+                    echo '</p>';
+                  }else if ($data['Rating'] >= 4 && $data['Rating'] <= 5) {
+                    echo "<p>";
+                    echo "<span>";
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo '<span class="glyphicon glyphicon-star"></span>';
+                    echo $data['Rating'];
+                    echo '</p>';
                   }
                   ?>
-                  <p> <?php echo "Rating: $data[Rating]" ?>
-              </div>
+
+                </div>
+                <hr>
+                <button type="button" class="btn btn-primary">Order</button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
