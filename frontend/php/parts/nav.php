@@ -12,7 +12,7 @@
             </button>
 
             <div class="navbar-brand not-active">
-              Scythian
+              <?php echo $title; ?>
             </div>
         </div>
 

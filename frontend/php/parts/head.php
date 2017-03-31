@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <?php $title = 'Scythian'; ?>
+    <?php $title = 'Shop30'; ?>
 
     <title><?php echo($title); ?></title>
 
