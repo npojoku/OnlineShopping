@@ -12,32 +12,33 @@
       $data=mysqli_fetch_array($result, MYSQLI_ASSOC);
    }
  }
- 
- 
+
+
 
     ?>
 <div class="container" style="width:65%">
 
-        <div class="thumbnail">
+        <div class="thumbnail" style="padding-left:30px;">
 
             <div class="caption-full">
-			 <h3 class="pull-right"><?php echo "ProductName:$data[ProductName]"; ?></h3>
-			<h3><?php echo "OrderId:$data[OrderId]"; ?></h3>
-               
-                
+
+			<h3><?php echo "OrderId: $data[OrderId]"; ?></h3>
+
+
                 <hr>
+								<p> <?php echo "&nbsp;&nbsp;ProductName: $data[ProductName]"; ?> </p>
                  <p> <?php if ($data['OrderStatus'] == 0) {
-                   echo "<p>&nbsp;&nbsp;Order Status: NotFinished </p>";
+                   echo "<p>&nbsp;&nbsp;Order Status: Pending </p>";
                  } else {
-                     echo "<p>&nbsp;&nbsp;Order Status: Finished </p>";
+                     echo "<p>&nbsp;&nbsp;Order Status: Complete </p>";
                  }
                  ?>
-                
+
 				<p> <?php echo "&nbsp;&nbsp;Customer Name: $data[FirstName] $data[LastName]" ?> </p>
 				<p> <?php echo "&nbsp;&nbsp;Quantity: $data[Quantity]" ?> </p>
 				<p> <?php echo "&nbsp;&nbsp;Price: $data[Price]" ?> </p>
 				<p> <?php echo "&nbsp;&nbsp;Shop Name: $data[ShopName]" ?> </p>
-                
+
                 <hr>
                 <button type="button" class="btn btn-primary">Rating</button>
 
