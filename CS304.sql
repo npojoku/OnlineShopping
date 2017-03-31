@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 27, 2017 at 06:46 AM
+-- Generation Time: Mar 31, 2017 at 11:06 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -38,8 +38,8 @@ CREATE TABLE `CreditCard` (
 --
 
 INSERT INTO `CreditCard` (`CardId`, `PersonId`, `CreditCard`, `CreditExpDate`) VALUES
-(1, 2, '2323421234', '2019-04-26'),
-(2, 3, '23423432324', '2019-03-30');
+(1, 8, '6205105105105100', '2017-12-00'),
+(2, 8, '5105105105105100', '2019-01-00');
 
 -- --------------------------------------------------------
 
@@ -56,15 +56,19 @@ CREATE TABLE `Orders` (
   `Price` float NOT NULL,
   `Type` tinyint(1) DEFAULT NULL,
   `OrderStatus` tinyint(1) DEFAULT NULL,
-  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `CardId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Orders`
 --
 
-INSERT INTO `Orders` (`OrderId`, `BuyerId`, `ShopName`, `ProductId`, `Quantity`, `Price`, `Type`, `OrderStatus`, `TIMESTAMP`) VALUES
-(1, 2, 'Apple', 1, 2, 500, 1, 0, '2017-03-27 01:57:39');
+INSERT INTO `Orders` (`OrderId`, `BuyerId`, `ShopName`, `ProductId`, `Quantity`, `Price`, `Type`, `OrderStatus`, `TIMESTAMP`, `CardId`) VALUES
+(2, 7, 'HongShop', 1, 4, 22, 0, 0, '2017-03-27 04:38:52', NULL),
+(3, 3, 'HongShop', 1, 4, 30, 1, 0, '2017-03-31 20:40:27', NULL),
+(4, 8, 'Apple', 2, 1, 800, 1, 0, '2017-03-31 20:54:05', 1),
+(5, 8, 'Apple', 2, 2, 1600, 1, 0, '2017-03-31 20:59:37', 2);
 
 -- --------------------------------------------------------
 
@@ -94,7 +98,7 @@ INSERT INTO `Person` (`PersonId`, `Phone`, `Password`, `Address`, `FirstName`, `
 (5, 7782339482, 'afdd0b4ad2ec172c586e2150770fbf9e', 'vancouver bc 24324', 'boe', 'li', 'boeftw02@gmail.com', '2017-03-22 06:06:28'),
 (6, 7782339484, 'afdd0b4ad2ec172c586e2150770fbf9e', 'vancouver bc 24324', 'boe', 'li', 'boeftw04@gmail.com', '2017-03-22 06:07:10'),
 (7, 7782339485, 'afdd0b4ad2ec172c586e2150770fbf9e', 'vancouver bc 24324', 'boe', 'li', 'boeftw05@gmail.com', '2017-03-22 06:07:23'),
-(8, 7788616114, '258135cdbc357f1b07d2566c848da32d', 'ubc 2034', 'naing', 'phyo', 'naing@gmail.com', '2017-03-22 06:20:56');
+(8, 7788616112, 'b6eedb02ba6085dad80730ece3453633', '2366 Main Mall, Vancouver, BC V6T 1Z4', 'John', 'Smith', 'john@gmail.com', '2017-03-31 20:52:03');
 
 -- --------------------------------------------------------
 
@@ -113,10 +117,8 @@ CREATE TABLE `Products` (
 --
 
 INSERT INTO `Products` (`ProductId`, `ProductName`, `ProductDescription`) VALUES
-(1, 'MacBook Pro', 'Apple Laptop'),
-(2, 'iPhone', 'Apple Phone'),
-(3, 'ThinkPad', 'Windows Laptop'),
-(4, 'Galaxy S7', 'Samsung Phone');
+(1, 'UBC U-PASS', 'UBC U-PASS 2017'),
+(2, 'iPhone 7 Red', 'Latest iPhone from Apple 4-7 inch display');
 
 -- --------------------------------------------------------
 
@@ -136,7 +138,7 @@ CREATE TABLE `Quality` (
 INSERT INTO `Quality` (`QualityId`, `Name`) VALUES
 (1, 'Very Good'),
 (2, 'Good'),
-(3, 'Average'),
+(3, 'Normal'),
 (4, 'Bad');
 
 -- --------------------------------------------------------
@@ -156,10 +158,9 @@ CREATE TABLE `Rating` (
 --
 
 INSERT INTO `Rating` (`ProductId`, `Rating`, `OrderId`) VALUES
-(1, 5, 1),
-(2, 4, 1),
-(3, 3, 1),
-(4, 2, 1);
+(1, 5, 2),
+(1, 3, 3),
+(2, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -178,9 +179,9 @@ CREATE TABLE `Retailers` (
 --
 
 INSERT INTO `Retailers` (`PersonId`, `ShopName`, `DepositAccount`) VALUES
-(2, 'Apple', '123456789'),
-(4, 'Lenovo', '543211'),
-(3, 'Samsung', '1235678');
+(7, 'Apple', '51607500'),
+(2, 'HongShop', '1234567'),
+(8, 'Microsoft', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -191,7 +192,7 @@ INSERT INTO `Retailers` (`PersonId`, `ShopName`, `DepositAccount`) VALUES
 CREATE TABLE `Sells` (
   `ProductId` int(11) NOT NULL,
   `ShopName` char(50) NOT NULL,
-  `Type` tinyint(1) DEFAULT NULL,
+  `Type` tinyint(1) NOT NULL,
   `Quantity` int(11) DEFAULT NULL,
   `QualityId` int(11) DEFAULT NULL,
   `Price` float DEFAULT NULL
@@ -202,10 +203,9 @@ CREATE TABLE `Sells` (
 --
 
 INSERT INTO `Sells` (`ProductId`, `ShopName`, `Type`, `Quantity`, `QualityId`, `Price`) VALUES
-(1, 'Apple', 1, 10, NULL, 500),
-(2, 'Apple', 0, 1, 1, 450),
-(3, 'Lenovo', 0, 2, NULL, 600),
-(4, 'Samsung', 1, 20, NULL, 650);
+(1, 'HongShop', 0, 2, 3, 22),
+(1, 'HongShop', 1, 1, NULL, 30),
+(2, 'Apple', 1, 28, NULL, 800);
 
 --
 -- Indexes for dumped tables
@@ -225,7 +225,8 @@ ALTER TABLE `Orders`
   ADD PRIMARY KEY (`OrderId`),
   ADD KEY `ProductId` (`ProductId`),
   ADD KEY `BuyerId` (`BuyerId`),
-  ADD KEY `ShopName` (`ShopName`);
+  ADD KEY `ShopName` (`ShopName`),
+  ADD KEY `CardId` (`CardId`);
 
 --
 -- Indexes for table `Person`
@@ -266,9 +267,9 @@ ALTER TABLE `Retailers`
 -- Indexes for table `Sells`
 --
 ALTER TABLE `Sells`
-  ADD UNIQUE KEY `ProductId` (`ProductId`,`ShopName`),
-  ADD KEY `ShopName` (`ShopName`),
-  ADD KEY `QualityId` (`QualityId`);
+  ADD KEY `QualityId` (`QualityId`),
+  ADD KEY `ProductId` (`ProductId`,`ShopName`,`Type`) USING BTREE,
+  ADD KEY `ShopName` (`ShopName`,`ProductId`,`Type`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -283,17 +284,17 @@ ALTER TABLE `CreditCard`
 -- AUTO_INCREMENT for table `Orders`
 --
 ALTER TABLE `Orders`
-  MODIFY `OrderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `OrderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `Person`
 --
 ALTER TABLE `Person`
-  MODIFY `PersonId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `PersonId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `Products`
 --
 ALTER TABLE `Products`
-  MODIFY `ProductId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ProductId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
@@ -308,6 +309,7 @@ ALTER TABLE `CreditCard`
 -- Constraints for table `Orders`
 --
 ALTER TABLE `Orders`
+  ADD CONSTRAINT `CardId` FOREIGN KEY (`CardId`) REFERENCES `CreditCard` (`CardId`),
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `Products` (`ProductId`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`BuyerId`) REFERENCES `Person` (`PersonId`),
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`ShopName`) REFERENCES `Retailers` (`ShopName`);

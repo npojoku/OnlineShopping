@@ -118,11 +118,12 @@
                    <h4 class="pull-right" id='total'>
                     </h4>
                     <br>
-                    <?php foreach($msg as $m){
-                       echo "$m";
-                    }
-                    ?>
               </form>
+
+              <?php foreach($msg as $m){
+                 echo "$m";
+              }
+              ?>
             </div>
         </div>
 
