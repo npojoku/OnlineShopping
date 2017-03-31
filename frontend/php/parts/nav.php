@@ -55,7 +55,14 @@
                     <!-- view orders available to all logged-in users -->
                     <li>
                       <a href="orderList.php">
-                        View Orders
+                        Order Placed
+                      </a>
+                    </li>
+
+                    <!-- orders Received available to all retailers -->
+                    <li <?php if (! isRetailer()){?>style="display:none"<?php } ?>>
+                      <a href="orderReceived.php">
+                        Order Received
                       </a>
                     </li>
 
