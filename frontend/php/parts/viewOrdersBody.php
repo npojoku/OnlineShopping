@@ -7,10 +7,14 @@
  FROM Orders o, Person p, Products pd
   WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && p.PersonId = $PersonId && o.OrderId = $id && o.OrderStatus = $status
   GROUP BY o.OrderId, o.OrderStatus";
+ ;
   if ($result=mysqli_query($con,$sql)) {
       $data=mysqli_fetch_array($result, MYSQLI_ASSOC);
    }
  }
+ 
+ 
+
     ?>
 <div class="container" style="width:65%">
 
@@ -30,7 +34,8 @@
                  ?>
                 
 				<p> <?php echo "&nbsp;&nbsp;Customer Name: $data[FirstName] $data[LastName]" ?> </p>
-				<p> <?php echo "&nbsp;&nbsp;Phone Number	: $data[Phone]" ?> </p>
+				<p> <?php echo "&nbsp;&nbsp;Quantity: $data[Quantity]" ?> </p>
+				<p> <?php echo "&nbsp;&nbsp;Price: $data[Price]" ?> </p>
 				<p> <?php echo "&nbsp;&nbsp;Shop Name: $data[ShopName]" ?> </p>
                 
                 <hr>
