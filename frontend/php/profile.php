@@ -1,7 +1,9 @@
 <DOCTYPE html>
 
-<?php $title = 'Scythian'; ?>
-<?php require '../../backend/core.inc.php'; ?>
+<?php include '../../backend/profile/getCustomer.php'; ?>
+<?php include '../../backend/profile/getRetailer.php'; ?>
+<?php include '../../backend/account/getCardList.php'; ?>
+<?php include '../../backend/profile/updatePerson.php'; ?>
 
 <html>
 <!-- header -->
@@ -16,12 +18,6 @@
 
 <!-- footer -->
 <?php include('parts/footer.php'); ?>
-
-<!-- jQuery -->
-<script src="../js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="../js/bootstrap.min.js"></script>
 
 </body>
 </html>
