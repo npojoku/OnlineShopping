@@ -57,12 +57,11 @@ if(isset($_POST['updatePerson'])){
     }
 
     // validate credit card fields
-    $CreditIdList[] = $_POST['CardId'];
-    $CreditCardList[] = $_POST['CreditCard'];
-    $CreditExpDateList[] = $_POST['CreditExpDate'];
+    $CreditIdList = $_POST['CardId'];
+    $CreditCardList = $_POST['CreditCard'];
+    $CreditExpDateList = $_POST['CreditExpDate'];
 
-
-    $isValid &= isCreditCardListValid($errors, $CreditCardList);
+    $isValid &= isCreditCardListValid($errors, $CreditIdList, $CreditCardList);
 
     if($isValid){
       if (!hasDuplicateEmail($errors, $con, $Email) &&

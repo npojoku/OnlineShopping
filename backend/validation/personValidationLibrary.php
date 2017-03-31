@@ -30,7 +30,6 @@ function areRetailerFieldsEmpty(& $errors){
     return true;
   }
 
-  // verify password has been entered
   if(!isset($_POST['DepositAccount']) || empty($_POST['DepositAccount'])){
     $errors[] = '<div class="alert alert-danger" role="alert"><center>Please fill in all the fields!</center></div>';
     return true;
