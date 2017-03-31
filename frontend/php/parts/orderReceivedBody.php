@@ -47,7 +47,7 @@
     
     $PersonId = getPersonId();
 
-    $sql0 = "SELECT ShopName FROM Retailers WHERE PersonId=2";
+    $sql0 = "SELECT ShopName FROM Retailers WHERE PersonId=$PersonId";
     $result0=mysqli_query($con,$sql0);
     $row0=mysqli_fetch_array($result0, MYSQLI_ASSOC);
     $ShopName = $row0["ShopName"];
