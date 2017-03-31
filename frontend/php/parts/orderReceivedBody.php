@@ -1,10 +1,10 @@
 
 <div class="container">
 <div class="col-md-7 col-md-offset-2">
-  <h3> Orders Placed </h3>
+  <h3> Orders Received </h3>
   <br>
   <div class="row">
-  <form action = "../php/orderList.php" method = "get">
+  <form action = "../php/orderReceived.php" method = "get">
   <div class="col-sm-5">
     <div class="input-group">
       <input  type="text" class="form-control" name="OrderId" placeholder="Search Order Id">
@@ -14,7 +14,7 @@
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
   </form>
-  <form action = "../php/orderList.php" method = "get" id="report_filter">
+  <form action = "../php/orderReceived.php" method = "get" id="report_filter">
   <div class="col-sm-5">
     <div class="input-group">
       <select name="filter" class="form-control" onchange="document.getElementById('report_filter').submit();"
@@ -36,7 +36,7 @@
     <th> FirstName </th>
 	<th> LastName </th>
 	<th> Phone </th>
-	<th> ShopName </th>
+	<th> Address </th>
 	<th> ProductName </th> 
 	<th> Quantity </th>
 	<th> Price </th>
@@ -44,12 +44,18 @@
 	<th> TIMESTAMP </th>
   </tr>
 <?php
-
+    
     $PersonId = getPersonId();
-    $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
-	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && p.PersonId = $PersonId
-	GROUP BY o.OrderId, o.OrderStatus";
+
+    $sql0 = "SELECT ShopName FROM Retailers WHERE PersonId=2";
+    $result0=mysqli_query($con,$sql0);
+    $row0=mysqli_fetch_array($result0, MYSQLI_ASSOC);
+    $ShopName = $row0["ShopName"];
+
+    $sql="SELECT o.OrderId, p.FirstName,p.LastName,p.Phone,p.Address,pd.ProductName,o.Quantity,o.Price,o.OrderStatus,o.TIMESTAMP
+          FROM Orders o, Person p, Products pd
+          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId
+	        GROUP BY o.OrderId, o.OrderStatus";
 
 
     
@@ -57,37 +63,37 @@
 if (isset($_GET["OrderId"])) {
   $name = $_GET["OrderId"];
 
-    $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
-	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && OrderId LIKE '%$name%' && p.PersonId = $PersonId
-	GROUP BY o.OrderId, o.OrderStatus";
+    $sql="SELECT o.OrderId, p.FirstName,p.LastName,p.Phone,p.Address,pd.ProductName,o.Quantity,o.Price,o.OrderStatus,o.TIMESTAMP
+          FROM Orders o, Person p, Products pd
+          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId AND o.OrderId ='$name'
+          GROUP BY o.OrderId, o.OrderStatus";
 	
 
 
     
 } else if(isset($_GET["filter"])) {
    if ($_GET["filter"] == 1) {
-    $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
-	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && o.OrderStatus = 1 && p.PersonId = $PersonId
-	GROUP BY OrderId, o.OrderStatus";
+    $sql="SELECT o.OrderId, p.FirstName,p.LastName,p.Phone,p.Address,pd.ProductName,o.Quantity,o.Price,o.OrderStatus,o.TIMESTAMP
+          FROM Orders o, Person p, Products pd
+          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId AND o.OrderStatus = 1
+	         GROUP BY OrderId, o.OrderStatus";
 	
    } else if ($_GET["filter"] == 2) {
-     $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
-	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && o.OrderStatus = 0 && p.PersonId = $PersonId
-	GROUP BY OrderId, o.OrderStatus";
+     $sql="SELECT o.OrderId, p.FirstName,p.LastName,p.Phone,p.Address,pd.ProductName,o.Quantity,o.Price,o.OrderStatus,o.TIMESTAMP
+          FROM Orders o, Person p, Products pd
+          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId AND o.OrderStatus = 0
+           GROUP BY OrderId, o.OrderStatus";
 	
    }else if ($_GET["filter"] == 3) {
-      $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
-	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId  && p.PersonId = $PersonId
-	GROUP BY OrderId, o.OrderStatus
+      $sql="SELECT o.OrderId, p.FirstName,p.LastName,p.Phone,p.Address,pd.ProductName,o.Quantity,o.Price,o.OrderStatus,o.TIMESTAMP
+          FROM Orders o, Person p, Products pd
+          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId
+	   GROUP BY OrderId, o.OrderStatus
      ORDER BY o.TIMESTAMP desc" ;
    }else if ($_GET["filter"] == 4) {
-      $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
-	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && p.PersonId = $PersonId
+      $sql="SELECT o.OrderId, p.FirstName,p.LastName,p.Phone,p.Address,pd.ProductName,o.Quantity,o.Price,o.OrderStatus,o.TIMESTAMP
+          FROM Orders o, Person p, Products pd
+          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId
 	GROUP BY OrderId, o.OrderStatus
      ORDER BY o.TIMESTAMP";
    }
@@ -104,7 +110,7 @@ if ($result=mysqli_query($con,$sql))
     <td>$row[FirstName] </td>
     <td>$row[LastName] </td>
 	<td>$row[Phone] </td>
-	<td>$row[ShopName] </td>
+	<td>$row[Address] </td>
 	<td>$row[ProductName] </td>
 	<td>$row[Quantity] </td>
 	<td>$row[Price] </td>
