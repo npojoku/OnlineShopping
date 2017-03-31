@@ -90,6 +90,7 @@ if ($result=mysqli_query($con,$sql))
     echo "<td> New </td>";
   }
   echo ("
+
     <td>$row[Price]</td>
     <td>$row[Quantity]</td>
     <td>$row[Rating]</td>
