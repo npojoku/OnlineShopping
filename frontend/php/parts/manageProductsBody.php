@@ -27,7 +27,7 @@ $qualityList = getQualityList();
                    <form class="form-horizontal" action="manageProducts.php" method="post">
 
                       <div class="form-group" style="display:block">
-                              <table class="table table-bordered table-hover" id="tableAddRow">
+                              <table class="table table-bordered table-hover style="width: auto;" id="tableAddRow">
                                   <thead>
                                       <tr>
                                           <th><label class="control-label">Product</label></th>
