@@ -45,10 +45,10 @@ This is the view orders page.
   </tr>
 <?php
 
-   
+    $PersonId = getPersonId();
     $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
 	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId";
+	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && p.PersonId = $PersonId";
 
 
     
@@ -58,7 +58,7 @@ if (isset($_GET["OrderId"])) {
 
     $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
 	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && OrderId LIKE '%$name%'";
+	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && OrderId LIKE '%$name%' && p.PersonId = $PersonId";
 
 
     
@@ -66,20 +66,20 @@ if (isset($_GET["OrderId"])) {
    if ($_GET["filter"] == 1) {
     $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
 	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && o.OrderStatus = 1";
+	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && o.OrderStatus = 1 && p.PersonId = $PersonId";
    } else if ($_GET["filter"] == 2) {
      $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
 	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && o.OrderStatus = 0";
+	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && o.OrderStatus = 0 && p.PersonId = $PersonId";
    }else if ($_GET["filter"] == 3) {
       $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
 	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId
-     ORDER BY o.TIMESTAMP desc";
+	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId  && p.PersonId = $PersonId
+     ORDER BY o.TIMESTAMP desc" ;
    }else if ($_GET["filter"] == 4) {
       $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
 	FROM Orders o, Person p, Products pd
-	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId
+	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && p.PersonId = $PersonId
      ORDER BY o.TIMESTAMP";
    }
 }
