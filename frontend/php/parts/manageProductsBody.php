@@ -1,6 +1,5 @@
 <!-- populate fields with user information -->
 <?php
-$productList = getProductList();
 $retailedList = getRetailerProductList();
 $qualityList = getQualityList();
 
@@ -36,7 +35,10 @@ $qualityList = getQualityList();
                                           <th><label class="control-label">Quantity</label></th>
                                           <th><label class="control-label">Price $</label></th>
                                           <th style="width:10px">
-                                            <span class="glyphicon glyphicon-plus btn" onclick="addTableRow(this)"></span></th>
+                                            <?php
+                                            $jsonList = json_encode($productList);
+                                            echo "<span class='glyphicon glyphicon-plus btn' onclick='addProductTableRow(this,'$jsonList')'></span></th>";
+                                            ?>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -101,6 +103,9 @@ $qualityList = getQualityList();
 
                               // price
                               echo "<td><input type='number' min='0.01' step='0.01' class='form-control' name='Price[]' placeholder='' value='$Price'></td>";
+
+                              // delete button
+                              echo "<td><input type='text' style='display:none' class='form-control' name='CardId[]' value='$ProductId'><input type='button' class='btn form-control' onclick='removeSoldProduct(this)' value='-'></input></td>";
 
                             echo '</tr>';
                         }
