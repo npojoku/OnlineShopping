@@ -1,4 +1,3 @@
-This is the view orders page.
 <div class="container">
 <div class="col-md-7 col-md-offset-2">
   <h3> Orders List </h3>
@@ -37,7 +36,7 @@ This is the view orders page.
 	<th> LastName </th>
 	<th> Phone </th>
 	<th> ShopName </th>
-	<th> ProductName </th> 
+	<th> ProductName </th>
 	<th> Quantity </th>
 	<th> Price </th>
 	<th> OrderStatus </th>
@@ -45,13 +44,13 @@ This is the view orders page.
   </tr>
 <?php
 
-   
+
     $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
 	FROM Orders o, Person p, Products pd
 	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId";
 
 
-    
+
 
 if (isset($_GET["OrderId"])) {
   $name = $_GET["OrderId"];
@@ -61,7 +60,7 @@ if (isset($_GET["OrderId"])) {
 	WHERE o.BuyerId = p.PersonId && o.ProductId = pd.ProductId && OrderId LIKE '%$name%'";
 
 
-    
+
 } else if(isset($_GET["filter"])) {
    if ($_GET["filter"] == 1) {
     $sql="SELECT OrderId, FirstName,LastName,Phone,ShopName,ProductName,Quantity,Price,o.OrderStatus,o.TIMESTAMP
@@ -98,7 +97,7 @@ if ($result=mysqli_query($con,$sql))
   <td>$row[Quantity]</td>
   <td>$row[Price]</td>
   <td>$row[OrderStatus]</td>
-  <td>$row[TIMESTAMP]</td> 
+  <td>$row[TIMESTAMP]</td>
   </tr>");
   // Free result set
   mysqli_free_result($result);

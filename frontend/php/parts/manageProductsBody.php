@@ -1,1 +1,1 @@
-This is the manage products page.
+<a href="createProduct.php">Create a New Product</a>
