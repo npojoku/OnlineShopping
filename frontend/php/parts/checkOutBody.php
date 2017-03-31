@@ -37,15 +37,22 @@
         $status = 0;
         $valid = true;
 
+        $getCardIdQuery = "SELECT CardId FROM CreditCard WHERE CreditCard = $card";
+
+        if ($result=mysqli_query($con,$getCardIdQuery)) {
+            $getCardId=mysqli_fetch_array($result, MYSQLI_ASSOC);
+         }
+
+
         if ($product['Quantity'] < $orderQty) {
           $msg[] = '<div class="alert alert-danger" role="alert">You cannot order more than the quantity available!</div>';
            $valid = false;
         }
 
         if ($valid) {
-        $query = mysqli_prepare($con, "INSERT INTO Orders (BuyerId, ShopName, ProductId, Quantity, Price, Type, OrderStatus, CreditCard)
+        $query = mysqli_prepare($con, "INSERT INTO Orders (BuyerId, ShopName, ProductId, Quantity, Price, Type, OrderStatus, CardId)
               VALUES (?,?,?,?,?,?,?,?)");
-        $query->bind_param("isiidiis", $PersonId, $product['ShopName'], $id, $orderQty, $orderPrice, $type, $status, $card);
+        $query->bind_param("isiidiii", $PersonId, $product['ShopName'], $id, $orderQty, $orderPrice, $type, $status, $getCardId['CardId']);
         $query->execute();
 
         $msg[] = '<div class="alert alert-success" role="alert">Your order has been placed successfully!</div>';
@@ -69,6 +76,8 @@
                 <?php echo "<p><strong><font size=4 color=#428bca>$product[ProductName]</font></strong> <small> by $product[ShopName]</small> </p>";
                 if ($product['Quantity'] > 0) {
                   echo "<p style='color:#5cb85c'>In Stock</p>";
+                } else {
+                  echo "<p style='color:##d9534f'>Out Of Stock</p>";
                 }
                 echo "<p>Quantity Available: $product[Quantity]</p>";
                 echo "<p id = 'price' style='display:none;'>$product[Price]</p>";

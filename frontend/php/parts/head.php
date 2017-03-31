@@ -8,7 +8,7 @@
 
     <?php $title = 'Shop30'; ?>
 
-    <title><?php echo($title); ?></title>
+    <title><<?php echo($title); ?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
