@@ -92,4 +92,16 @@ function logoutUser(){
 function getPersonId(){
 	return $_SESSION['PersonId'];
 }
+
+// get shop name associated with retailer id
+function getShopName(){
+	global $con;
+
+	$PersonId = getPersonId();
+
+	$sql = "SELECT ShopName FROM Retailers WHERE PersonId='$PersonId'";
+	$result = $con->query($sql);
+
+	return $result->fetch_assoc()['ShopName'];
+}
 ?>
