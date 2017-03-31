@@ -23,15 +23,15 @@
                 
                 <hr>
                  <p> <?php if ($data['OrderStatus'] == 0) {
-                   echo "<p>&nbsp;&nbsp;OrderStatus: NotFinished </p>";
+                   echo "<p>&nbsp;&nbsp;Order Status: NotFinished </p>";
                  } else {
-                     echo "<p>&nbsp;&nbsp;OrderStatus: Finished </p>";
+                     echo "<p>&nbsp;&nbsp;Order Status: Finished </p>";
                  }
                  ?>
                 
-				<p> <?php echo "&nbsp;&nbsp;Name: $data[FirstName] $data[LastName]" ?> </p>
-				<p> <?php echo "&nbsp;&nbsp;Phone: $data[Phone]" ?> </p>
-				<p> <?php echo "&nbsp;&nbsp;ShopName: $data[ShopName]" ?> </p>
+				<p> <?php echo "&nbsp;&nbsp;Customer Name: $data[FirstName] $data[LastName]" ?> </p>
+				<p> <?php echo "&nbsp;&nbsp;Phone Number	: $data[Phone]" ?> </p>
+				<p> <?php echo "&nbsp;&nbsp;Shop Name: $data[ShopName]" ?> </p>
                 
                 <hr>
                 <button type="button" class="btn btn-primary">Rating</button>
