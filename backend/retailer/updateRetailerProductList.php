@@ -39,6 +39,7 @@ function updateRetailerProductList($con, $ProductIdList, $TypeList, $QuantityLis
   foreach($ProductIdList as $key => $ProductId){
 
     if(doesSellsExist($con, $ProductId, $TypeList[$key])){
+
       // if card exists, update
       $result = updateSells($con, $ProductId, $TypeList[$key], $QuantityList[$key], $PriceList[$key]);
 

@@ -49,7 +49,6 @@ $qualityList = getQualityList();
                           $ProductId = $retailed['ProductId'];
                           $Type = $retailed['Type'];
                           $Quantity = $retailed['Quantity'];
-                          $QualityName = $retailed['QualityName'];
                           $Price = $retailed['Price'];
 
                             echo "<tr>";
@@ -70,7 +69,15 @@ $qualityList = getQualityList();
 
                               // display quality
                               echo "<td>";
+
+                              // some fields may have a null quality entry
+                              if(sellsHasQuality($ProductId, $Type)){
+                                $QualityName = getQualityName($ProductId, $Type);
                                 echo "<input type='text' name='QualityName[]' value='$QualityName' readonly>";
+                              } else {
+                                echo "<input type='text' name='QualityName[]' value=N/A readonly>";
+                              }
+
                               echo "</td>";
 
                               // display quantity (can edit)
@@ -84,8 +91,9 @@ $qualityList = getQualityList();
                               echo "</td>";
 
                               // delete button
-                              echo "<td><input type='text' style='display:none' class='form-control' name='ProductId[]' value='$ProductId'>";
+                              echo "<td>";
                               echo "<input type='text' style='display:none' class='form-control' name='Type[]' value='$Type'>";
+                              echo "<input type='text' style='display:none' class='form-control' name='ProductId[]' value='$ProductId'>";
                               echo "<input type='button' class='btn form-control' onclick='removeSoldProduct(this)' value='-'></input></td>";
 
                             echo '</tr>';
