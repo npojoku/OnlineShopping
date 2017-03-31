@@ -1,5 +1,5 @@
 <?php
-include '../../backend/validation/retailerValidationLibrary.php';
+include_once '../../backend/validation/retailerValidationLibrary.php';
 
 global $con;
 $errors = array();
@@ -9,14 +9,13 @@ if(isset($_POST['createSells'])) {
   $hasEmptyFields = areSellsFieldsEmpty($errors);
 
   if(! $hasEmptyFields){
-    echo 'hello';
     $ProductId = $_POST['ProductId'];
     $QualityId = $_POST['QualityId'];
     $Quantity = $_POST['Quantity'];
     $Price = $_POST['Price'];
 
     // set used to appropriate value
-    if($_POST['isUsed']) $Type = 0;
+    if(isset($_POST['isUsed'])) $Type = 0;
     else $Type = 1;
 
     if(! hasDuplicateShopProducts($errors, $con, $ProductId, $Type)){
@@ -27,7 +26,8 @@ if(isset($_POST['createSells'])) {
         header("Location: ../../frontend/php/manageProducts.php");
       } else {
         // if query failed go to error page
-        header("Location: ../../frontend/php/error.php");
+        //header("Location: ../../frontend/php/error.php");
+        echo 'an errro happened';
       }
     }
 
@@ -45,6 +45,7 @@ function createSells($con, $ProductId, $QualityId, $Quantity, $Price, $Type){
     $sql = "INSERT INTO `Sells`(`ProductId`, `ShopName`, `Type`, `Quantity`, `QualityId`, `Price`)
       VALUES ('$ProductId','$ShopName','$Type','$Quantity','$QualityId','$Price')";
   }
+
   $query = mysqli_prepare($con, $sql);
 
   return $query->execute();

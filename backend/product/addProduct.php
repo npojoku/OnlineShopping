@@ -5,7 +5,7 @@ global $con;
 $errors = array();
 
 // request to create a new product
-if(isset($_POST['createProduct'])) {
+if(isset($_POST['addProduct'])) {
   $hasEmptyFields = areProductFieldsEmpty($errors);
 
   if(! $hasEmptyFields){

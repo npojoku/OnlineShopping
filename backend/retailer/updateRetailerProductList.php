@@ -1,13 +1,13 @@
 <?php
 /* update changed personal information of current user */
-include '../../backend/validation/retailerValidationLibrary.php';
+include_once '../../backend/validation/retailerValidationLibrary.php';
 include 'deleteSells.php';
 include 'updateSells.php';
 
 global $con;
 $errors = array();
 
-if(isset($_POST['updatePerson'])){
+if(isset($_POST['updateProducts'])){
   // find retailer update type
   // add retailer is check box is marked
   // update if user was already a retailer

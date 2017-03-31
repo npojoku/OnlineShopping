@@ -58,7 +58,7 @@ $qualityList = getQualityList();
                       <!-- used checkbox -->
                       <div class="checkbox" style="margin-left: 140px;">
                         <label>
-                          <input type="checkbox" name = "isUsed" onclick="showUsedQuality('usedQuality')"> Used Product
+                          <input type="checkbox" name="isUsed" onclick="showUsedQuality('usedQuality')"> Used Product
                         </label>
                       </div>
 
@@ -69,7 +69,7 @@ $qualityList = getQualityList();
                         <label class="col-sm-3 control-label">Quality</label>
                         <div class="col-sm-9">
                             <?php
-                              echo "<select>";
+                              echo "<select name='QualityId'>";
 
                               foreach ($qualityList as $qualityField){
                                   $qualityId = $qualityField['QualityId'];

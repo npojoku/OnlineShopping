@@ -20,7 +20,7 @@ $qualityList = getQualityList();
                         padding-bottom: 25px;">
                     <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manage Shop Products
                     </h3>
-                    <a href="createProduct.php">Create a new product</a>
+                    <a href="createSells.php">Create a new product</a>
 
                     <br>
 
@@ -70,12 +70,12 @@ $qualityList = getQualityList();
 
                               // display quality
                               echo "<td>";
-                                echo "<input type='text' name='Quantity[]' value='$QualityName' readonly>";
+                                echo "<input type='text' name='QualityName[]' value='$QualityName' readonly>";
                               echo "</td>";
 
                               // display quantity (can edit)
                               echo "<td>";
-                                echo "<input type='text' name='QualityName[]' value='$Quantity' placeholder='Quantity'>";
+                                echo "<input type='text' name='Quantity[]' value='$Quantity' placeholder='Quantity'>";
                               echo "</td>";
 
                               // display price
@@ -84,8 +84,8 @@ $qualityList = getQualityList();
                               echo "</td>";
 
                               // delete button
-                              echo "<td><input type='text' style='display:none' class='form-control' name='CardId[]' value='$ProductId'>";
-                              echo "<input type='text' style='display:none' class='form-control' name='CardId[]' value='$Type'>";
+                              echo "<td><input type='text' style='display:none' class='form-control' name='ProductId[]' value='$ProductId'>";
+                              echo "<input type='text' style='display:none' class='form-control' name='Type[]' value='$Type'>";
                               echo "<input type='button' class='btn form-control' onclick='removeSoldProduct(this)' value='-'></input></td>";
 
                             echo '</tr>';

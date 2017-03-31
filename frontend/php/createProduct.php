@@ -1,7 +1,7 @@
 <DOCTYPE html>
 
 <?php require '../../backend/core.inc.php'; ?>
-<?php include '../../backend/product/createProduct.php'; ?>
+<?php include '../../backend/product/addProduct.php'; ?>
 
 <html>
 <!-- header -->

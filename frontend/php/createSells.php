@@ -4,7 +4,7 @@
 <?php include '../../backend/product/getProductList.php' ?>
 <?php include '../../backend/retailer/updateRetailerProductList.php' ?>
 <?php include '../../backend/product/getQualityList.php' ?>
-<?php include '../../backend/retailer/createSells.php' ?>
+<?php include '../../backend/retailer/addSells.php' ?>
 
 <html>
 <!-- header -->

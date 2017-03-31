@@ -23,7 +23,7 @@
                         <label >Description</label>
                         <input type="text" class="form-control" maxlength="100" name = "ProductDescription" placeholder="Product Description">
                       </div>
-                      <button type="submit" name="createProduct" class="btn btn-primary">Create</button>
+                      <button type="submit" name="addProduct" class="btn btn-primary">Create</button>
                     </form>
 
                     <!-- populate error results from form submission -->
