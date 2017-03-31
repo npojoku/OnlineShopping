@@ -99,7 +99,7 @@ if($retailer){
                               <table class="table table-bordered table-hover" id="tableAddRow">
                                   <thead>
                                       <tr>
-                                          <th><label class="control-label">Credit Card number #</label></th>
+                                          <th><label class="control-label">Credit Card #</label></th>
                                           <th><label class="control-label">Credit Expiration Date</label></th>
                                           <th style="width:10px">
                                             <span class="glyphicon glyphicon-plus btn" onclick="addTableRow(this)"></span></th>

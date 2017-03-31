@@ -31,14 +31,11 @@ $qualityList = getQualityList();
                                   <thead>
                                       <tr>
                                           <th><label class="control-label">Product</label></th>
-                                          <th><label class="control-label">Used</label></th>
+                                          <th><label class="control-label">Type</label></th>
+                                          <th><label class="control-label">Quality</label></th>
                                           <th><label class="control-label">Quantity</label></th>
                                           <th><label class="control-label">Price $</label></th>
                                           <th style="width:10px">
-                                            <?php
-                                            $jsonList = json_encode($productList);
-                                            echo "<span class='glyphicon glyphicon-plus btn' onclick='addProductTableRow(this,'$jsonList')'></span></th>";
-                                            ?>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -48,64 +45,48 @@ $qualityList = getQualityList();
                       if ($retailedList->num_rows > 0){
 
                         while ( $retailed = mysqli_fetch_array($retailedList, MYSQLI_ASSOC) ) {
+                          $ProductName = $retailed['ProductName'];
                           $ProductId = $retailed['ProductId'];
                           $Type = $retailed['Type'];
                           $Quantity = $retailed['Quantity'];
-                          $QualityId = $retailed['QualityId'];
+                          $QualityName = $retailed['QualityName'];
                           $Price = $retailed['Price'];
 
                             echo "<tr>";
 
-                              // drop down of product name and description
+                              // display product name
                               echo "<td>";
-                                echo "<select style='width:100px'>";
-
-                                foreach ($productList as $productField){
-                                    $productId = $productField['ProductId'];
-                                    $productName = $productField['ProductName'];
-                                    $productDescription = $productField['ProductDescription'];
-                                    $entry = "'$productName' - '$productDescription'";
-
-                                    echo "<option value='$productId'>$entry</option>";
-                                }
-
-                                echo "</select>";
+                                echo "<input type='text' name='ProductName[]' value='$ProductName' readonly>";
                               echo "</td>";
 
-                              // drop down of quality (enable only if used)
+                              // display type
                               echo "<td>";
-                                echo "<div class='form-group'>";
-                                if($Type){
-                                  // new
-                                  echo '<input type="checkbox" class="col-sm-1" name = "Type[]" onclick="toggleQuality(this)"></input>';
-                                  echo "<select class='col-sm-7' disabled>";
-                                } else {
-                                  // used
-                                  echo '<input type="checkbox" class="col-sm-1" name = "Type[]" onclick="toggleQuality(this)" checked></input>';
-                                  echo "<select class='col-sm-7'>";
-                                }
+                              if($Type == 1){
+                                echo "<input type='text' value='New' readonly>";
+                              } else {
+                                echo "<input type='text' value='Used' readonly>";
+                              }
+                              echo "</td>";
 
-                                foreach ($qualityList as $qualityField){
-                                    $qualityId = $qualityField['QualityId'];
-                                    $qualityName = $qualityField['Name'];
+                              // display quality
+                              echo "<td>";
+                                echo "<input type='text' name='Quantity[]' value='$QualityName' readonly>";
+                              echo "</td>";
 
-                                    echo "<option value='$qualityId'>$qualityName</option>";
-                                }
+                              // display quantity (can edit)
+                              echo "<td>";
+                                echo "<input type='text' name='QualityName[]' value='$Quantity' placeholder='Quantity'>";
+                              echo "</td>";
 
-                                echo "<option value='-1'>New (No Quality)</option>";
-
-                                echo '</select>';
-                                echo "</div>";
-                              echo '</td>';
-
-                              // quantity
-                              echo "<td><input type='number' class='form-control' name='Quantity[]' placeholder='' value='$Quantity'></td>";
-
-                              // price
-                              echo "<td><input type='number' min='0.01' step='0.01' class='form-control' name='Price[]' placeholder='' value='$Price'></td>";
+                              // display price
+                              echo "<td>";
+                                echo "<input type='text' name='Price[]' value='$Price' placeholder='Price'>";
+                              echo "</td>";
 
                               // delete button
-                              echo "<td><input type='text' style='display:none' class='form-control' name='CardId[]' value='$ProductId'><input type='button' class='btn form-control' onclick='removeSoldProduct(this)' value='-'></input></td>";
+                              echo "<td><input type='text' style='display:none' class='form-control' name='CardId[]' value='$ProductId'>";
+                              echo "<input type='text' style='display:none' class='form-control' name='CardId[]' value='$Type'>";
+                              echo "<input type='button' class='btn form-control' onclick='removeSoldProduct(this)' value='-'></input></td>";
 
                             echo '</tr>';
                         }
@@ -116,7 +97,7 @@ $qualityList = getQualityList();
                       </div>
 
                       <br>
-                      <button type="submit" class="btn btn-primary" name="manageProducts" style="margin-left: 200px;">Update Shop</button>
+                      <button type="submit" class="btn btn-primary" name="updateProducts" style="margin-left: 200px;">Save Changes</button>
 
                     </form>
 

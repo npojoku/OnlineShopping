@@ -6,8 +6,9 @@ function getRetailerProductList(){
   $ShopName = getShopName();
 
   // return mysql object
-  $query = "SELECT ProductId, Type, Quantity, QualityId, Price
-    FROM Sells WHERE ShopName = '$ShopName' ORDER BY ProductId";
+  $query = "SELECT p.ProductName, s.ProductId, s.Type, s.Quantity, q.Name as QualityName, s.Price
+        FROM Products p, Sells s, Quality q
+        WHERE p.ProductId=s.ProductId and s.QualityId = q.QualityId and s.ShopName='$ShopName'";
 
   $obj = mysqli_query($con, $query);
 
