@@ -32,57 +32,71 @@
 <table class="table table-hover">
   <tr>
     <th> Name </th>
+    <th> Type </th>
     <th> Price </th>
-    <th> Rating </th>
     <th> Quantity </th>
+    <th> Rating </th>
   </tr>
 <?php
 
-  $sql="SELECT ProductName,Quantity,Rating,Price
+  $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
   FROM Products p, Sells s, Rating r
-  WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId";
+  WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId
+  GROUP BY r.ProductId, s.Type";
 
 if (isset($_GET["ProductName"])) {
   $name = $_GET["ProductName"];
-  $sql="SELECT ProductName,Quantity,Rating,Price
+  $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
   FROM Products p, Sells s, Rating r
-  WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId && p.ProductName LIKE '%$name%'";
+  WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId  AND p.ProductName LIKE '%$name%'
+  GROUP BY r.ProductId, s.Type";
 } else if(isset($_GET["filter"])) {
    if ($_GET["filter"] == 1) {
-     $sql="SELECT ProductName,Quantity,Rating,Price
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     GROUP BY r.ProductId, s.Type
      ORDER BY s.Price desc";
    } else if ($_GET["filter"] == 2) {
-     $sql="SELECT ProductName,Quantity,Rating,Price
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     GROUP BY r.ProductId, s.Type
      ORDER BY s.Price";
    }else if ($_GET["filter"] == 3) {
-     $sql="SELECT ProductName,Quantity,Rating,Price
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     GROUP BY r.ProductId, s.Type
      ORDER BY r.Rating desc";
    }else if ($_GET["filter"] == 4) {
-     $sql="SELECT ProductName,Quantity,Rating,Price
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     GROUP BY r.ProductId, s.Type
      ORDER BY r.Rating";
    }
 }
 
 if ($result=mysqli_query($con,$sql))
   {
-  while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC))
+  while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
   echo ("
   <tr>
-  <td><a href='#'> $row[ProductName] </a></td>
-  <td>$row[Price]</td>
-  <td>$row[Rating]</td>
-  <td>$row[Quantity]</td>
+  <td><a href='../php/viewProducts.php?view=$row[ProductId]'> $row[ProductName] </a></td> ");
+  if ($row['Type'] == 0) {
+    echo "<td> Used </td>";
+  } else {
+    echo "<td> New </td>";
+  };
+  echo ("
+    <td>$row[Price]</td>
+    <td>$row[Quantity]</td>
+    <td>$row[Rating]</td>
   </tr>");
+}
   // Free result set
-  mysqli_free_result($result);
+  //mysqli_free_result($result);
 }
  ?>
  </table>
