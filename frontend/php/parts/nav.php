@@ -55,23 +55,17 @@
                     <!-- view orders available to all logged-in users -->
                     <li>
                       <a href="orderList.php">
-                        Order Placed
+                        View Orders
                       </a>
                     </li>
 
                     <!-- orders Received available to all retailers -->
                     <li <?php if (! isRetailer()){?>style="display:none"<?php } ?>>
                       <a href="orderReceived.php">
-                        Order Received
-                      </a>
-                    </li>
-
-                    <!-- manage orders available to all retailers -->
-                    <li <?php if (! isRetailer()){?>style="display:none"<?php } ?>>
-                      <a href="manageOrders.php">
                         Manage Orders
                       </a>
                     </li>
+
                   </ul>
                 </li>
 
