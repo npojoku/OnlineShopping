@@ -25,8 +25,13 @@ function isCardIdEmpty(& $errors){
   }
 }
 
-function isCreditCardListValid(& $errors, $CreditCardList){
-  foreach($CreditCardList as $Card){
+function isCreditCardListValid(& $errors, $CardIdList, $CreditCardList){
+  foreach($CreditCardList as $Key => $Card){
+    // ignore table entries marked for deletion
+    if($CardIdList[$Key] === "delete" || $CardIdList[$Key] < 0) {
+      continue;
+    }
+
     if(! isCreditCardValid($errors, $Card)) return false;
   }
   return true;

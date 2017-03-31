@@ -1,5 +1,7 @@
 <?php
 function addCard($con, $CreditCard, $CreditExpDate){
+
+  echo 'I got to the add card function :)';
   $PersonId = getPersonId();
   $sql = "INSERT INTO CreditCard(PersonId, CreditCard, CreditExpDate)
     VALUES ('$PersonId','$CreditCard',STR_TO_DATE('$CreditExpDate','%Y-%m'))";

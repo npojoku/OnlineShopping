@@ -29,7 +29,7 @@
 
                     <!-- view products available to all logged-in users -->
                     <li>
-                      <a href="viewProducts.php">
+                      <a href="productList.php">
                         View Products
                       </a>
                     </li>

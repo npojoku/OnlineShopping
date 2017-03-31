@@ -118,9 +118,9 @@ if($retailer){
                           $cardDate = date("Y-m", strtotime($card['CreditExpDate']));
 
                             echo "<tr>";
-                              echo "<td><input type='text' class='form-control' name='CreditCard' placeholder='Credit Card' value='$cardName'></td>";
-                              echo "<td><input type='month' class='form-control' name='CreditExpDate' value='$cardDate'></td>";
-                              echo "<td><input type='text' style='display:none' class='form-control' name='CardId' value='$cardId'><input type='button' class='btn form-control' onclick='removeCard(this)' value='-'></input></td>";
+                              echo "<td><input type='text' class='form-control' name='CreditCard[]' placeholder='Credit Card' value='$cardName'></td>";
+                              echo "<td><input type='month' class='form-control' name='CreditExpDate[]' value='$cardDate'></td>";
+                              echo "<td><input type='text' style='display:none' class='form-control' name='CardId[]' value='$cardId'><input type='button' class='btn form-control' onclick='removeCard(this)' value='-'></input></td>";
                             echo '</tr>';
                             $count = $count + 1;
                         }
