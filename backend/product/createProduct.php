@@ -17,7 +17,7 @@ if(isset($_POST['createProduct'])) {
       // create product and redirect
       if(createProduct($con, $ProductName, $ProductDescription)){
         // return to manage products page
-        header("Location: ../../frontend/php/manageProducts.php");
+        header("Location: ../../frontend/php/createSells.php");
       } else {
         // if query failed go to error page
         header("Location: ../../frontend/php/error.php");

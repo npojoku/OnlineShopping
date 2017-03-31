@@ -54,7 +54,7 @@
 
                     <!-- view orders available to all logged-in users -->
                     <li>
-                      <a href="viewOrders.php">
+                      <a href="orderList.php">
                         View Orders
                       </a>
                     </li>
