@@ -41,7 +41,7 @@
 
   $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
   FROM Products p, Sells s, Rating r
-  WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId
+  WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId AND s.Quantity > 0
   GROUP BY r.ProductId, s.Type";
 
 if (isset($_GET["ProductName"])) {
@@ -57,7 +57,7 @@ if (isset($_GET["ProductName"])) {
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
      GROUP BY r.ProductId, s.Type
       ORDER BY s.Price desc";
-    
+
    } else if ($_GET["filter"] == 2) {
      $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r

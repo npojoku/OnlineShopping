@@ -12,10 +12,10 @@ $qualityList = getQualityList();
 
         <div class="col-md-9">
 
-            <div class="thumbnail">
+            <div class="thumbnail" style="width:1200px;">
                 <div class="caption-full" style="
-                        padding-left: 140px;
-                        padding-right: 140px;
+                        padding-left: 50px;
+                        padding-right: 50px;
                         padding-top: 25px;
                         padding-bottom: 25px;">
                     <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manage Shop Products
