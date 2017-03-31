@@ -83,13 +83,14 @@ if ($result=mysqli_query($con,$sql))
   while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
   echo ("
   <tr>
-  <td><a href='../php/viewProducts.php?view=$row[ProductId]'> $row[ProductName] </a></td> ");
+  <td><a href='../php/viewProducts.php?id=$row[ProductId]&type=$row[Type]'> $row[ProductName] </a></td> ");
   if ($row['Type'] == 0) {
     echo "<td> Used </td>";
   } else {
     echo "<td> New </td>";
-  };
+  }
   echo ("
+
     <td>$row[Price]</td>
     <td>$row[Quantity]</td>
     <td>$row[Rating]</td>
