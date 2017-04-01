@@ -23,6 +23,7 @@
         <option value="2" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='2') echo "selected";?>>Price: Lowest to Highest</option>
         <option value="3" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='3') echo "selected";?>>Rating: Highest to Lowest</option>
         <option value="4" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='4') echo "selected";?>>Rating: Lowest to Highest</option>
+        <option value="5" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='5') echo "selected";?>>Only Highest Rating</option>
       </select>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
@@ -54,28 +55,36 @@ if (isset($_GET["ProductName"])) {
    if ($_GET["filter"] == 1) {
      $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
-     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
       ORDER BY s.Price desc";
 
    } else if ($_GET["filter"] == 2) {
      $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
-     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
      ORDER BY s.Price";
    }else if ($_GET["filter"] == 3) {
      $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
-     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
      ORDER BY r.Rating desc";
    }else if ($_GET["filter"] == 4) {
      $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
-     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId
+     WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
      ORDER BY r.Rating";
+   }else if ($_GET["filter"] == 5) {
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, SUM(s.Quantity) AS Quantity, s.Price, rat2.max_avg AS Rating 
+     FROM Products p, Sells s,
+     (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat, 
+     (SELECT MAX(rat1.avg_rat) AS max_avg FROM (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat1) rat2 
+     WHERE rat.ProductId = p.ProductId AND rat.avg_rat = rat2.max_avg AND s.ProductId = p.ProductId AND s.Quantity > 0
+     GROUP BY rat.ProductId, s.type
+     ";
    }
 }
 

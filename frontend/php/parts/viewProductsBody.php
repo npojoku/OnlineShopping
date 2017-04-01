@@ -19,9 +19,6 @@
  }
     ?>
 <div class="container" style="width:65%">
-
-
-
         <div class="thumbnail" style="padding-left:30px;">
 
             <div class="caption-full">
