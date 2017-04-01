@@ -28,6 +28,23 @@
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </form>
+<?php
+$popularItemQuery = "SELECT ProductName FROM Products p
+WHERE NOT EXISTS (SELECT * FROM Person p WHERE NOT EXISTS
+  (SELECT * FROM Orders o WHERE o.ProductId = p.ProductId AND o.BuyerId = p.PersonId))";
+
+  if ($result=mysqli_query($con,$popularItemQuery)) {
+      $popularItem=mysqli_fetch_array($result, MYSQLI_ASSOC);
+   }
+?>
+<br>
+<br>
+ <?php
+ if ($popularItem['ProductName'] != null) {
+   echo "<p>&nbsp;&nbsp;&nbsp; <span class='glyphicon glyphicon-star' aria-hidden='true'>
+   </span> Most popular item:<strong> $popularItem[ProductName]</strong></p>";
+ }
+ ?>
 </div>
 <br>
 <table class="table table-hover">

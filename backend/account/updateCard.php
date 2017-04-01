@@ -7,6 +7,8 @@ function updateCard($con, $CardId, $CreditCard, $CreditExpDate){
     SET `CreditCard`='$CreditCard',`CreditExpDate`=STR_TO_DATE('$CreditExpDate','%Y-%m')
     WHERE CardId = '$CardId' AND PersonId = '$PersonId'";
 
+   $sql = "DELETE FROM `CreditCard` WHERE PersonID = '$PersonId' and CardId = '$CardId'";
+
   $query = mysqli_prepare($con, $sql);
 
   return $query->execute();

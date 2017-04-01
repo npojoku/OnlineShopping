@@ -40,8 +40,14 @@
 				<p> <?php echo "&nbsp;&nbsp;Shop Name: $data[ShopName]" ?> </p>
 
                 <hr>
-                <button type="button" class="btn btn-primary">Rating</button>
-
+				
+				<div class="rating">
+						Rate for this order!
+						<?php foreach(range(1,5) as $rating):?>
+						<a href="../php/rate.php?orderid=<?php echo $id;?>&rating=<?php echo $rating;?>"><?php echo $rating; ?></a>
+						<?php endforeach;?>
+				</div>
+     
             </div>
 
         </div>
