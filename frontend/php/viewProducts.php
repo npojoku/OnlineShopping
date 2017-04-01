@@ -1,6 +1,7 @@
 <DOCTYPE html>
 
-<?php require '../../backend/core.inc.php'; ?>
+<!-- user session must be logged in to view this page -->
+<?php include '../../backend/session.php'; ?>
 
 <html>
 <!-- header -->

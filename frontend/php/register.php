@@ -1,5 +1,6 @@
 <DOCTYPE html>
 
+<!-- additional backend libraries -->
 <?php include('../../backend/register/registerPerson.php'); ?>
 
 <html>

@@ -1,4 +1,6 @@
 <?php
+include_once 'core.inc.php';
+
 if (isLoggedIn()) {
 	$PersonId = $_SESSION['PersonId'];
 	$UserType = $_SESSION['UserType'];
