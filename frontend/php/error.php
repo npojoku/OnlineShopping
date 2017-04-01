@@ -1,5 +1,7 @@
 <DOCTYPE html>
 
+<?php include '../../backend/core.inc.php'; ?>
+
 <html>
 <!-- header -->
 <?php include('parts/head.php'); ?>

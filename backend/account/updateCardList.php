@@ -22,7 +22,6 @@
       } else if(doesCardExist($con, abs($CardId))){
         // if card id is negative it has been marked for deletion
         $result = deleteCard($con, abs($CardId));
-
       }
 
       if(!$result) return $result;

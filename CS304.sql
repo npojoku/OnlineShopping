@@ -309,7 +309,7 @@ ALTER TABLE `CreditCard`
 -- Constraints for table `Orders`
 --
 ALTER TABLE `Orders`
-  ADD CONSTRAINT `CardId` FOREIGN KEY (`CardId`) REFERENCES `CreditCard` (`CardId`),
+  ADD CONSTRAINT `CardId` FOREIGN KEY (`CardId`) REFERENCES `CreditCard` (`CardId`) ON DELETE CASCADE,
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `Products` (`ProductId`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`BuyerId`) REFERENCES `Person` (`PersonId`),
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`ShopName`) REFERENCES `Retailers` (`ShopName`);

@@ -11,9 +11,9 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <div class="navbar-brand not-active">
+            <a class="navbar-brand" href='productList.php'>
               <?php echo $title; ?>
-            </div>
+            </a>
         </div>
 
         <div class="collapse navbar-collapse">
