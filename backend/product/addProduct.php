@@ -23,7 +23,7 @@ if(isset($_POST['addProduct'])) {
           $sql2 = "INSERT INTO Rating(ProductId, Rating, OrderId) VALUES($pid, 0, 0)";
           $query2 = mysqli_prepare($con, $sql2); 
           if($query2->execute()){
-            header("Location: ../createShells.php");
+            header("Location: ../../frontend/php/manageProducts.php");
           } else {
             // if query failed go to error page
             header("Location: ../../frontend/php/error.php");
