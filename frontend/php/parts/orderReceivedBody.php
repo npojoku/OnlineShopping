@@ -26,8 +26,8 @@
         <option value="0">Filter/Order by</option>
         <option value="3" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='3') echo "selected";?>>Most Recent Orders</option>
         <option value="4" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='4') echo "selected";?>>Oldest Orders</option>
-        <option value="1" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='1') echo "selected";?>>Finished Orders</option>
-        <option value="2" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='2') echo "selected";?>>Unfinished Orders</option>
+        <option value="1" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='1') echo "selected";?>>Completed Orders</option>
+        <option value="2" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='2') echo "selected";?>>Pending Orders</option>
       </select>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
@@ -38,6 +38,7 @@
 <br>
 <table class="table table-hover">
   <tr>
+  <th> Order ID </th>
   <th> Purchase Time</th>
   <th> Product </th>
   <th> Quantity </th>
@@ -46,7 +47,7 @@
 	<th> Last Name </th>
 	<th> Phone </th>
 	<th> Address </th>
-	<th> Finished </th>
+	<th> Status </th>
   </tr>
 <?php
 
@@ -70,7 +71,7 @@ if (isset($_GET["OrderId"])) {
 
     $sql="SELECT o.OrderId, p.FirstName,p.LastName,p.Phone,p.Address,pd.ProductName,o.Quantity,o.Price,o.OrderStatus,o.TIMESTAMP
           FROM Orders o, Person p, Products pd
-          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId AND o.OrderId ='$name'
+          WHERE o.BuyerId = p.PersonId AND o.ShopName LIKE '$ShopName' AND pd.ProductId = o.ProductId AND o.OrderId LIKE '%$name%'
           GROUP BY o.OrderId, o.OrderStatus";
 
 
@@ -109,6 +110,7 @@ if ($result=mysqli_query($con,$sql))
   while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
   echo ("
+    <td>$row[OrderId] </td>
     <td>$row[TIMESTAMP] </td>
     <td>$row[ProductName] </td>
     <td>$row[Quantity] </td>
