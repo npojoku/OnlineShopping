@@ -38,9 +38,9 @@
 
                 <div class="ratings">
                   <?php
-                  if ($data['Rating'] == null) {
+                  if ($data['Rating'] == 0) {
                     echo "No one has rated this item yet!";
-                  } else if ($data['Rating'] >= 0 && $data['Rating'] <= 1) {
+                  } else if ($data['Rating'] > 0 && $data['Rating'] <= 1) {
                     echo "<p>Rating: ";
                     echo "<span>";
                     echo '<span class="glyphicon glyphicon-star"></span>';
