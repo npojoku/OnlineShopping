@@ -1,6 +1,6 @@
 
 <div class="container">
-<div class="col-md-7 col-md-offset-2">
+<div class="col-md-11">
   <h3>Manage Orders</h3>
   <br>
   <div class="row">
@@ -47,7 +47,6 @@
 	<th> Phone </th>
 	<th> Address </th>
 	<th> Finished </th>
-
   </tr>
 <?php
 

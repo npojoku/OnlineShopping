@@ -1,6 +1,6 @@
 
 <div class="container">
-<div class="col-md-7 col-md-offset-1">
+<div class="col-md-8">
   <h3> Orders Placed </h3>
   <br>
   <div class="row">
@@ -42,6 +42,7 @@
 	<th> Price </th>
 	<th> OrderStatus </th>
 	<th> TIMESTAMP </th>
+  <th> </th>
   </tr>
 <?php
 
@@ -115,10 +116,11 @@ if ($result=mysqli_query($con,$sql))
   } else {
     echo "<td> Complete </td>";
   }
-  echo("
-	<td>$row[TIMESTAMP] </td>
-
-  </tr>");
+  echo "<td>$row[TIMESTAMP] </td>";
+  echo "<td> <a href='../php/rate.php?id=$row[OrderId]'> <button type='button' class='btn btn-primary'";
+  if ($row['OrderStatus']==0) {echo "disabled='disabled'>Rate</button></td>"; }
+ else {echo "'>Rate</button></a></td>"; }
+  echo "</tr>";
 }
   // Free result set
   //mysqli_free_result($result);
