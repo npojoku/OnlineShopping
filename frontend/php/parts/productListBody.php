@@ -19,14 +19,35 @@
       <select name="filter" class="form-control" onchange="document.getElementById('report_filter').submit();"
       style="bottom: 15px;">
         <option value="0">Filter by</option>
-        <option value="1" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='1') echo "selected";?>>Price: Highest to Lowest</option>
-        <option value="2" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='2') echo "selected";?>>Price: Lowest to Highest</option>
-        <option value="3" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='3') echo "selected";?>>Rating: Highest to Lowest</option>
-        <option value="4" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='4') echo "selected";?>>Rating: Lowest to Highest</option>
+        <option value="1" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='1')
+        echo "selected";?>>Price: Highest to Lowest</option>
+        <option value="2" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='2')
+        echo "selected";?>>Price: Lowest to Highest</option>
+        <option value="3" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='3')
+        echo "selected";?>>Rating: Highest to Lowest</option>
+        <option value="4" <?php if(isset($_GET["filter"]) && htmlspecialchars($_GET["filter"])=='4')
+        echo "selected";?>>Rating: Lowest to Highest</option>
       </select>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </form>
+<?php
+$popularItemQuery = "SELECT ProductName FROM Products p
+WHERE NOT EXISTS (SELECT * FROM Person p WHERE NOT EXISTS
+  (SELECT * FROM Orders o WHERE o.ProductId = p.ProductId AND o.BuyerId = p.PersonId))";
+
+  if ($result=mysqli_query($con,$popularItemQuery)) {
+      $popularItem=mysqli_fetch_array($result, MYSQLI_ASSOC);
+   }
+?>
+<br>
+<br>
+ <?php
+ if ($popularItem['ProductName'] != null) {
+   echo "<p>&nbsp;&nbsp;&nbsp; <span class='glyphicon glyphicon-star' aria-hidden='true'>
+   </span> Most popular item:<strong> $popularItem[ProductName]</strong></p>";
+ }
+ ?>
 </div>
 <br>
 <table class="table table-hover">
