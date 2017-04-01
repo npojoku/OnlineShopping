@@ -46,8 +46,6 @@ function createSells($con, $ProductId, $QualityId, $Quantity, $Price, $Type){
       VALUES ('$ProductId','$ShopName','$Type','$Quantity','$QualityId','$Price')";
   }
 
-echo $sql;
-
 
   $query = mysqli_prepare($con, $sql);
 

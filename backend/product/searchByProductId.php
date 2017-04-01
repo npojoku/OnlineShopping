@@ -1,28 +1,6 @@
 <?php
 require '../core.inc.php';
 require '../session.php';
-/*
-Path: backend/product/searchByProductId.php
-
-Description: search product by its product Id
-
-Input:
-		$_GET
-			'ProductId'		(int) 
-			
-Output
-		json array:
-			[ProductName]			ProductName
-			[ProductDescription]			ProductDescription
-			[NumRating]				number of ratings
-			[AverageRating]			average ratings for this product
-
-		
-Error:
-	0						failed
-	-1						no session
-	-7						required field not set
-*/
 
 if (isset($_GET['ProductId']) && !empty($_GET['ProductId'])) {
 	$ProductId = $_GET['ProductId'];
@@ -42,7 +20,7 @@ if (isset($_GET['ProductId']) && !empty($_GET['ProductId'])) {
 	print json_encode($resultArray);
 
 } else {
-	echo "-7";
+	header("Location: ../../frontend/php/error.php");
 }
 
 ?>

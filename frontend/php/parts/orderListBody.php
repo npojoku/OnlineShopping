@@ -32,16 +32,17 @@
 <br>
 <table class="table table-hover">
   <tr>
-    <th> OrderId </th>
-    <th> FirstName </th>
-	<th> LastName </th>
-	<th> Phone </th>
-	<th> ShopName </th>
-	<th> ProductName </th>
-	<th> Quantity </th>
-	<th> Price </th>
-	<th> OrderStatus </th>
-	<th> TIMESTAMP </th>
+    <th></th>
+    <th> Purchase Time</th>
+    <th> Product </th>
+    <th> Quantity </th>
+    <th> Price </th>
+    <th> Shop Name </th>
+    <th> First Name </th>
+  	<th> Last Name </th>
+  	<th> Phone </th>
+  	<th> Address </th>
+  	<th> Finished </th>
   <th> </th>
   </tr>
 <?php
@@ -97,18 +98,17 @@ if (isset($_GET["OrderId"])) {
 if ($result=mysqli_query($con,$sql))
   {
   while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+  echo ("<tr>");
+  echo "<td>$row[TIMESTAMP] </td>";
   echo ("
-  <tr>
-  <td><a href='../php/viewOrders.php?id=$row[OrderId]&status=$row[OrderStatus]'> $row[OrderId] </a></td> ");
-
-  echo ("
+  <td>$row[ProductName] </td>
+  <td>$row[Quantity] </td>
+  <td>$row[Price] </td>
+    <td>$row[ShopName] </td>
     <td>$row[FirstName] </td>
     <td>$row[LastName] </td>
 	<td>$row[Phone] </td>
-	<td>$row[ShopName] </td>
-	<td>$row[ProductName] </td>
-	<td>$row[Quantity] </td>
-	<td>$row[Price] </td>
+
 	");
 
 	 if ($row['OrderStatus'] == 0) {
@@ -116,7 +116,7 @@ if ($result=mysqli_query($con,$sql))
   } else {
     echo "<td> Complete </td>";
   }
-  echo "<td>$row[TIMESTAMP] </td>";
+
   echo "<td> <a href='../php/rate.php?id=$row[OrderId]'> <button type='button' class='btn btn-primary'";
   if ($row['OrderStatus']==0) {echo "disabled='disabled'>Rate</button></td>"; }
  else {echo "'>Rate</button></a></td>"; }

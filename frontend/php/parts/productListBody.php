@@ -66,7 +66,7 @@ if (isset($_GET["ProductName"])) {
   $name = $_GET["ProductName"];
   $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
   FROM Products p, Sells s, Rating r
-  WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId  AND p.ProductName LIKE '%$name%'
+  WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId  AND p.ProductName LIKE '%$name%' AND s.Quantity > 0
   GROUP BY r.ProductId, s.Type";
 } else if(isset($_GET["filter"])) {
    if ($_GET["filter"] == 1) {
@@ -87,18 +87,18 @@ if (isset($_GET["ProductName"])) {
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
-     ORDER BY r.Rating desc";
+     ORDER BY Rating desc";
    }else if ($_GET["filter"] == 4) {
      $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
-     ORDER BY r.Rating";
+     ORDER BY Rating";
    }else if ($_GET["filter"] == 5) {
-     $sql="SELECT p.ProductId, p.ProductName, s.Type, SUM(s.Quantity) AS Quantity, s.Price, rat2.max_avg AS Rating 
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, SUM(s.Quantity) AS Quantity, s.Price, rat2.max_avg AS Rating
      FROM Products p, Sells s,
-     (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat, 
-     (SELECT MAX(rat1.avg_rat) AS max_avg FROM (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat1) rat2 
+     (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat,
+     (SELECT MAX(rat1.avg_rat) AS max_avg FROM (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat1) rat2
      WHERE rat.ProductId = p.ProductId AND rat.avg_rat = rat2.max_avg AND s.ProductId = p.ProductId AND s.Quantity > 0
      GROUP BY rat.ProductId, s.type
      ";
@@ -116,12 +116,15 @@ if ($result=mysqli_query($con,$sql))
   } else {
     echo "<td> New </td>";
   }
-  echo ("
+  echo "<td>$row[Price]</td>";
+  echo "<td>$row[Quantity]</td>";
+  if ($row['Rating'] > 0) {
+    echo "<td>$row[Rating]</td>";
+  } else {
+    echo "<td> </td>";
+  }
 
-    <td>$row[Price]</td>
-    <td>$row[Quantity]</td>
-    <td>$row[Rating]</td>
-  </tr>");
+  echo "</tr>";
 }
   // Free result set
   //mysqli_free_result($result);
