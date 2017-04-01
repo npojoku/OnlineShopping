@@ -27,10 +27,10 @@ if(isset($_POST['confirmRate'])){
      $valid = false;
   }
     if ($valid) {
-      $sql1 = "DELETE FROM Rating WHERE ProductId = $productId['ProductId'] AND OrderId =0 AND Rating = 0";
+      $sql1 = "DELETE FROM Rating WHERE ProductId = $productId[ProductId] AND OrderId =0 AND Rating = 0";
       $query1 = mysqli_prepare($con, $sql1);
       $query1->execute();
-      
+
       $query = mysqli_prepare($con, "INSERT INTO Rating (ProductId, Rating, OrderId)
             VALUES (?,?,?)");
       $query->bind_param("iii", $productId['ProductId'], $rateValue, $orderid);
