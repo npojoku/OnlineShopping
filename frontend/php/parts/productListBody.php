@@ -57,45 +57,45 @@ WHERE NOT EXISTS (SELECT * FROM Person p WHERE NOT EXISTS
   </tr>
 <?php
 
-  $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
+  $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, ROUND(AVG(r.Rating),2) AS Rating
   FROM Products p, Sells s, Rating r
   WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId AND s.Quantity > 0
   GROUP BY r.ProductId, s.Type";
 
 if (isset($_GET["ProductName"])) {
   $name = $_GET["ProductName"];
-  $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
+  $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, ROUND(AVG(r.Rating),2) AS Rating
   FROM Products p, Sells s, Rating r
   WHERE p.ProductId = s.ProductId AND s.ProductId = r.ProductId  AND p.ProductName LIKE '%$name%' AND s.Quantity > 0
   GROUP BY r.ProductId, s.Type";
 } else if(isset($_GET["filter"])) {
    if ($_GET["filter"] == 1) {
-     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, ROUND(AVG(r.Rating),2) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
       ORDER BY s.Price desc";
 
    } else if ($_GET["filter"] == 2) {
-     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, ROUND(AVG(r.Rating),2) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
      ORDER BY s.Price";
    }else if ($_GET["filter"] == 3) {
-     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, ROUND(AVG(r.Rating),2) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
      ORDER BY Rating desc";
    }else if ($_GET["filter"] == 4) {
-     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, AVG(r.Rating) AS Rating
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, s.Quantity, s.Price, ROUND(AVG(r.Rating),2) AS Rating
      FROM Products p, Sells s, Rating r
      WHERE p.ProductId = s.ProductId && s.ProductId = r.ProductId AND s.Quantity > 0
      GROUP BY r.ProductId, s.Type
      ORDER BY Rating";
    }else if ($_GET["filter"] == 5) {
-     $sql="SELECT p.ProductId, p.ProductName, s.Type, SUM(s.Quantity) AS Quantity, s.Price, rat2.max_avg AS Rating
+     $sql="SELECT p.ProductId, p.ProductName, s.Type, SUM(s.Quantity) AS Quantity, s.Price, ROUND(AVG(rat2.max_avg),2) AS Rating
      FROM Products p, Sells s,
      (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat,
      (SELECT MAX(rat1.avg_rat) AS max_avg FROM (SELECT r.ProductId, AVG(r.Rating) AS avg_rat FROM Rating r GROUP BY ProductId) rat1) rat2
